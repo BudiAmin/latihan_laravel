@@ -4,8 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PengaduanController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\Auth\ForgotPasswordController; // Pastikan ini ada
-use App\Http\Controllers\Auth\ResetPasswordController; // Pastikan ini ada
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 
 // Halaman utama - Statistik pengaduan
 Route::get('/', [PengaduanController::class, 'statistik'])->name('home');
@@ -16,7 +16,6 @@ Route::post('/login', [UserController::class, 'login']);
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
 // Rute untuk Lupa Kata Sandi (Email-Based Reset) - TIDAK DILINDUNGI AUTH
-// Error "Route [password.reset] not defined" terjadi karena rute ini hilang
 Route::get('forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
 Route::post('forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 Route::get('reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
@@ -37,10 +36,38 @@ Route::middleware(['auth', 'masyarakat'])->group(function () {
 
 // Halaman dashboard admin (Membutuhkan Login)
 Route::middleware(['auth', 'admin'])->group(function () {
+    // Existing Pengaduan routes
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/pengaduan/{id}', [AdminController::class, 'show'])->name('admin.pengaduan.show');
     Route::post('/admin/pengaduan/{id}/update-status', [AdminController::class, 'updateStatus'])->name('admin.pengaduan.updateStatus');
     Route::delete('/admin/pengaduan/{id}', [AdminController::class, 'destroy'])->name('admin.pengaduan.destroy');
+
+    // New User Management Routes
+    Route::prefix('admin/users')->name('admin.users.')->group(function () {
+        Route::get('/', [AdminController::class, 'usersIndex'])->name('index'); // This route is not explicitly used in dashboard.blade.php for listing but good for full CRUD
+        Route::get('/create', [AdminController::class, 'usersCreate'])->name('create');
+        Route::post('/', [AdminController::class, 'usersStore'])->name('store');
+        Route::get('/{id}/edit', [AdminController::class, 'usersEdit'])->name('edit');
+        Route::put('/{id}', [AdminController::class, 'usersUpdate'])->name('update');
+        Route::delete('/{id}', [AdminController::class, 'usersDestroy'])->name('destroy');
+    });
+
+    // New Tanggapan Management Routes
+    Route::prefix('admin/tanggapans')->name('admin.tanggapans.')->group(function () {
+        Route::get('/', [AdminController::class, 'tanggapansIndex'])->name('index'); // Same as above
+        Route::get('/create', [AdminController::class, 'tanggapansCreate'])->name('create');
+        Route::post('/', [AdminController::class, 'tanggapansStore'])->name('store');
+        Route::get('/{id}/edit', [AdminController::class, 'tanggapansEdit'])->name('edit');
+        Route::put('/{id}', [AdminController::class, 'tanggapansUpdate'])->name('update');
+        Route::delete('/{id}', [AdminController::class, 'tanggapansDestroy'])->name('destroy');
+    });
+
+    // New Password Reset Token Management Routes
+    // Note: 'email' is typically the primary key for password_reset_tokens table.
+    Route::prefix('admin/password_resets')->name('admin.password_resets.')->group(function () {
+        Route::get('/', [AdminController::class, 'passwordResetsIndex'])->name('index'); // Same as above
+        Route::delete('/{email}', [AdminController::class, 'passwordResetsDestroy'])->name('destroy');
+    });
 });
 
 // Halaman untuk Ubah Kata Sandi (Pengguna Sudah Login)
