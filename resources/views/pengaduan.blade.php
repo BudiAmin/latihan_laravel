@@ -422,8 +422,9 @@
                     </div>
                     <div class="header-actions">
                         <div class="has-text-right">
-                            <p class="has-text-weight-semibold">{{ date('d F Y') }}</p>
-                            <p class="has-text-grey">{{ date('H:i') }} WIB</p>
+                            {{-- MENGGUNAKAN CARBON UNTUK WAKTU SAAT INI DI DASHBOARD --}}
+                            <p class="has-text-weight-semibold">{{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</p>
+                            <p class="has-text-grey">{{ \Carbon\Carbon::now()->translatedFormat('H:i') }} WIB</p>
                         </div>
                     </div>
                 </div>
@@ -476,26 +477,26 @@
                             <input class="input" type="text" name="lokasi" placeholder="Contoh: Jl. Sudirman No. 123, Jakarta">
                         </div>
                     </div>
-                      <div class="field">
-                            <label class="label">Foto (opsional)</label>
-                            <div class="control">
-                                <div class="file has-name is-boxed is-success">
-                                    <label class="file-label">
-                                        <input class="file-input" type="file" name="foto" id="fileInput" accept="image/*" onchange="updateFileName()">
-                                        <span class="file-cta">
-                                            <span class="file-icon">
-                                                <i class="fas fa-upload"></i>
-                                            </span>
-                                            <span class="file-label">
-                                                Pilih Foto
-                                            </span>
+                    <div class="field">
+                        <label class="label">Foto (opsional)</label>
+                        <div class="control">
+                            <div class="file has-name is-boxed is-success">
+                                <label class="file-label">
+                                    <input class="file-input" type="file" name="foto" id="fileInput" accept="image/*" onchange="updateFileName()">
+                                    <span class="file-cta">
+                                        <span class="file-icon">
+                                            <i class="fas fa-upload"></i>
                                         </span>
-                                        <span class="file-name" id="fileName" style="max-width: 250px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                            Belum ada file dipilih
+                                        <span class="file-label">
+                                            Pilih Foto
                                         </span>
-                                    </label>
-                                </div>
-                            <p class="help">Format: JPG, PNG, maksimal 2MB</p>
+                                    </span>
+                                    <span class="file-name" id="fileName" style="max-width: 250px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                        Belum ada file dipilih
+                                    </span>
+                                </label>
+                            </div>
+                        <p class="help">Format: JPG, PNG, maksimal 2MB</p>
                         </div>
                     </div>
                     <div class="field">
@@ -531,12 +532,13 @@
                         </div>
                         
                         <div class="complaint-meta">
-                            <span><i class="fas fa-calendar"></i> {{ date('d F Y', strtotime($item->tanggal_pengaduan)) }}</span>
-                            <span><i class="fas fa-clock"></i> {{ date('H:i', strtotime($item->tanggal_pengaduan)) }} WIB</span>
+                            {{-- MENGGUNAKAN CARBON UNTUK TANGGAL DAN WAKTU PENGADUAN DENGAN PENGECEKAN NULL --}}
+                            <span><i class="fas fa-calendar"></i> {{ $item->tanggal_pengaduan ? $item->tanggal_pengaduan->translatedFormat('d F Y') : 'Tanggal tidak tersedia' }}</span>
+                            <span><i class="fas fa-clock"></i> {{ $item->tanggal_pengaduan ? $item->tanggal_pengaduan->translatedFormat('H:i') : 'Waktu tidak tersedia' }} WIB</span>
                         </div>
                         
                         @if($item->foto)
-                            <img src="{{ asset('storage/' . $item->foto) }}" class="complaint-image" onclick="openImageModal(this.src)" alt="Foto pengaduan">
+                            <img src="{{ Storage::url($item->foto) }}" class="complaint-image" onclick="openImageModal(this.src)" alt="Foto pengaduan">
                         @endif
                     </div>
                 @empty

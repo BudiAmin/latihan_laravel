@@ -90,14 +90,14 @@ return [
     |
     */
 
-    'passwords' => [
-        'users' => [
-            'provider' => 'users',
-            'table' => 'password_reset_tokens',
-            'expire' => 60,
-            'throttle' => 60,
-        ],
+   'passwords' => [
+    'users' => [
+        'provider' => 'users',
+        'table' => 'password_reset_tokens', // Ensure this table name matches your migration
+        'expire' => 60, // Token expiration in minutes
+        'throttle' => 60,
     ],
+],
 
     /*
     |--------------------------------------------------------------------------

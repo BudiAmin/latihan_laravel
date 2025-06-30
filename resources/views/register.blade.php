@@ -370,7 +370,17 @@
                                     </div>
                                     <p class="help">Kata sandi minimal 8 karakter</p>
                                 </div>
-
+                                <div class="field">
+                                    <label class="label">
+                                        <i class="fas fa-lock"></i> Konfirmasi Kata Sandi
+                                    </label>
+                                    <div class="control has-icons-left">
+                                        <input class="input" type="password" name="password_confirmation" placeholder="Ulangi kata sandi" required>
+                                        <span class="icon is-small is-left">
+                                            <i class="fas fa-lock"></i>
+                                        </span>
+                                    </div>
+                                </div>
                                 {{-- Role (opsional, default masyarakat) --}}
                                 <input type="hidden" name="role" value="masyarakat">
 
