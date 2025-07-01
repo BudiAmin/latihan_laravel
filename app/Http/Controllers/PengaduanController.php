@@ -18,7 +18,11 @@ class PengaduanController extends Controller
     public function index()
     {
         // Mengambil semua pengaduan yang dibuat oleh user yang sedang login, diurutkan dari yang terbaru
-        $pengaduan = Pengaduan::where('id_user', Auth::id())->latest()->get();
+        // Eager load relasi 'tanggapan' dan 'user' untuk Pengaduan
+        $pengaduan = Pengaduan::where('id_user', Auth::id())
+                                ->with(['tanggapan.admin', 'user']) // Load tanggapan, dan juga admin yang menanggapi
+                                ->latest()
+                                ->get();
         // Mengirim data pengaduan ke view 'pengaduan'
         return view('pengaduan', compact('pengaduan'));
     }

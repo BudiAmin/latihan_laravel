@@ -779,18 +779,31 @@
                                     <td>{{ $user->email }}</td>
                                     <td><span class="tag is-info">{{ ucfirst($user->role) }}</span></td>
                                     <td>
-                                        <div class="buttons">
-                                            <a href="{{ route('admin.users.edit', $user->id_user) }}" class="button is-warning is-small">
-                                                <span class="icon"><i class="fas fa-edit"></i></span>
-                                            </a>
-                                            <form method="POST" action="{{ route('admin.users.destroy', $user->id_user) }}" onsubmit="return confirm('Apakah Anda yakin ingin menghapus pengguna ini?')" style="display: inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="button is-danger is-small" type="submit">
-                                                    <span class="icon"><i class="fas fa-trash"></i></span>
-                                                </button>
-                                            </form>
-                                        </div>
+                                      <div class="buttons">
+                                {{-- Tombol Edit --}}
+                                    <a href="{{ route('admin.users.edit', $user->id_user) }}" class="button is-warning is-small">
+                                        <span class="icon">
+                                            <i class="fas fa-edit"></i>
+                                        </span>
+                                        <span>Edit</span>
+                                    </a>
+
+                                    {{-- Tombol Hapus --}}
+                                    <form method="POST"
+                                        action="{{ route('admin.users.destroy', $user->id_user) }}"
+                                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus pengguna ini?')"
+                                        style="display: inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="button is-danger is-small" type="submit">
+                                            <span class="icon">
+                                                <i class="fas fa-trash"></i>
+                                            </span>
+                                            <span>Hapus</span>
+                                        </button>
+                                    </form>
+                                </div>
+
                                     </td>
                                 </tr>
                                 @empty
