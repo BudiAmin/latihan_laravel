@@ -14,6 +14,7 @@ body {
     line-height: 1.6;
     color: #333;
     overflow-x: hidden;
+    background-color: #ffffff; /* Ubah ke putih */
 }
 
 .container {
@@ -51,7 +52,7 @@ body {
     gap: 10px;
     font-weight: 700;
     font-size: 1.5rem;
-    color: #2563eb;
+    color: #206b99; /* Biru Laut */
 }
 
 .nav-logo img {
@@ -74,7 +75,7 @@ body {
 }
 
 .nav-link:hover {
-    color: #2563eb;
+    color: #206b99; /* Biru Laut */
 }
 
 .nav-link::after {
@@ -84,7 +85,11 @@ body {
     left: 0;
     width: 0;
     height: 2px;
-    background: linear-gradient(90deg, #2563eb, #7c3aed);
+    background: linear-gradient(
+        90deg,
+        #4682b4,
+        #5f9ea0
+    ); /* Gradien Biru Laut */
     transition: width 0.3s ease;
 }
 
@@ -93,19 +98,23 @@ body {
 }
 
 .btn-login {
-    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    background: linear-gradient(
+        135deg,
+        #4682b4,
+        #5f9ea0
+    ); /* Gradien Biru Laut */
     color: white;
     padding: 0.5rem 1.5rem;
     border-radius: 25px;
     text-decoration: none;
     font-weight: 500;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+    box-shadow: 0 4px 15px rgba(60, 120, 180, 0.3); /* Shadow disesuaikan */
 }
 
 .btn-login:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+    box-shadow: 0 8px 25px rgba(60, 120, 180, 0.4); /* Shadow disesuaikan */
 }
 
 .hamburger {
@@ -125,7 +134,11 @@ body {
 /* Hero Section */
 .hero {
     min-height: 100vh;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(
+        135deg,
+        #4682b4 0%,
+        #206b99 100%
+    ); /* Gradien Biru Laut */
     position: relative;
     display: flex;
     align-items: center;
@@ -174,7 +187,11 @@ body {
 }
 
 .gradient-text {
-    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    background: linear-gradient(
+        135deg,
+        #e0f2f7,
+        #4682b4
+    ); /* Gradien Biru Laut Terang */
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -208,14 +225,18 @@ body {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #fbbf24, #f59e0b);
-    color: #1f2937;
-    box-shadow: 0 10px 30px rgba(251, 191, 36, 0.3);
+    background: linear-gradient(
+        135deg,
+        #4682b4,
+        #206b99
+    ); /* Gradien Biru Laut */
+    color: white; /* Warna teks putih agar kontras */
+    box-shadow: 0 10px 30px rgba(60, 120, 180, 0.3);
 }
 
 .btn-primary:hover {
     transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(251, 191, 36, 0.4);
+    box-shadow: 0 15px 40px rgba(60, 120, 180, 0.4);
 }
 
 .btn-secondary {
@@ -251,7 +272,7 @@ body {
 .floating-card i {
     font-size: 4rem;
     margin-bottom: 1rem;
-    color: #fbbf24;
+    color: #e0f2f7; /* Biru Laut Terang */
 }
 
 .floating-card h3 {
@@ -317,8 +338,8 @@ body {
 /* Stats Section */
 .stats {
     padding: 5rem 0;
-    background: linear-gradient(135deg, #1f2937, #374151);
-    color: white;
+    background: #e0f2f7; /* Biru Laut Terang sebagai latar belakang section */
+    color: #1f2937; /* Warna teks gelap agar kontras */
 }
 
 .stats-grid {
@@ -329,11 +350,11 @@ body {
 
 .stat-item {
     text-align: center;
-    background: rgba(255, 255, 255, 0.1);
+    background: #ffffff; /* Tetap putih untuk kartu */
     backdrop-filter: blur(10px);
     border-radius: 15px;
     padding: 2rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid #d9e3ea; /* Border lebih terang */
     transition: transform 0.3s ease;
 }
 
@@ -342,7 +363,11 @@ body {
 }
 
 .stat-icon {
-    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    background: linear-gradient(
+        135deg,
+        #4682b4,
+        #206b99
+    ); /* Gradien Biru Laut */
     width: 80px;
     height: 80px;
     border-radius: 50%;
@@ -351,25 +376,25 @@ body {
     justify-content: center;
     margin: 0 auto 1rem;
     font-size: 2rem;
-    color: #1f2937;
+    color: white; /* Warna ikon putih */
 }
 
 .stat-number {
     font-size: 3rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
-    color: #fbbf24;
+    color: #206b99; /* Biru Laut */
 }
 
 .stat-label {
     font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.8);
+    color: #6b7280; /* Warna teks abu-abu */
 }
 
 /* Services Section */
 .services {
     padding: 5rem 0;
-    background: #f8fafc;
+    background: #f8fafc; /* Tetap sama atau bisa putih juga */
 }
 
 .section-header {
@@ -413,7 +438,11 @@ body {
 }
 
 .service-icon {
-    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    background: linear-gradient(
+        135deg,
+        #4682b4,
+        #206b99
+    ); /* Gradien Biru Laut */
     width: 100px;
     height: 100px;
     border-radius: 50%;
@@ -509,7 +538,11 @@ body {
 .feature i {
     width: 50px;
     height: 50px;
-    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    background: linear-gradient(
+        135deg,
+        #4682b4,
+        #206b99
+    ); /* Gradien Biru Laut */
     color: white;
     border-radius: 50%;
     display: flex;
@@ -543,7 +576,7 @@ body {
 /* How It Works Section */
 .how-it-works {
     padding: 5rem 0;
-    background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+    background: #e0f2f7; /* Biru Laut Terang */
 }
 
 .steps {
@@ -562,7 +595,11 @@ body {
 .step-number {
     width: 80px;
     height: 80px;
-    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    background: linear-gradient(
+        135deg,
+        #4682b4,
+        #206b99
+    ); /* Gradien Biru Laut */
     color: white;
     border-radius: 50%;
     display: flex;
@@ -573,7 +610,7 @@ body {
     margin: 0 auto 2rem;
     position: relative;
     z-index: 2;
-    box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+    box-shadow: 0 10px 30px rgba(60, 120, 180, 0.3);
 }
 
 .step-content h3 {
@@ -595,7 +632,7 @@ body {
 /* Contact Section */
 .contact {
     padding: 5rem 0;
-    background: #1f2937;
+    background: #1f2937; /* Background gelap tetap atau bisa diubah */
     color: white;
 }
 
@@ -609,7 +646,7 @@ body {
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 1rem;
-    color: #fbbf24;
+    color: #e0f2f7; /* Biru Laut Terang */
 }
 
 .contact-info p {
@@ -638,8 +675,12 @@ body {
 .contact-item i {
     width: 50px;
     height: 50px;
-    background: linear-gradient(135deg, #fbbf24, #f59e0b);
-    color: #1f2937;
+    background: linear-gradient(
+        135deg,
+        #4682b4,
+        #206b99
+    ); /* Gradien Biru Laut */
+    color: white;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -650,7 +691,7 @@ body {
 .contact-item h4 {
     font-weight: 600;
     margin-bottom: 0.5rem;
-    color: #fbbf24;
+    color: #e0f2f7; /* Biru Laut Terang */
 }
 
 .contact-item p {
@@ -690,13 +731,13 @@ body {
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: #fbbf24;
+    border-color: #e0f2f7; /* Biru Laut Terang */
     background: rgba(255, 255, 255, 0.15);
 }
 
 /* Footer */
 .footer {
-    background: #111827;
+    background: #111827; /* Background gelap tetap atau bisa diubah */
     color: white;
     padding: 3rem 0 1rem;
 }
@@ -723,7 +764,7 @@ body {
 .footer-logo h3 {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #fbbf24;
+    color: #e0f2f7; /* Biru Laut Terang */
 }
 
 .footer-section p {
@@ -736,7 +777,7 @@ body {
     font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 1rem;
-    color: #fbbf24;
+    color: #e0f2f7; /* Biru Laut Terang */
 }
 
 .footer-section ul {
@@ -754,7 +795,7 @@ body {
 }
 
 .footer-section ul li a:hover {
-    color: #fbbf24;
+    color: #e0f2f7; /* Biru Laut Terang */
 }
 
 .social-links {
@@ -777,8 +818,8 @@ body {
 }
 
 .social-links a:hover {
-    background: #fbbf24;
-    color: #1f2937;
+    background: #4682b4; /* Biru Laut */
+    color: white; /* Warna teks putih */
     transform: translateY(-3px);
 }
 
@@ -788,7 +829,7 @@ body {
 }
 
 .schedule strong {
-    color: #fbbf24;
+    color: #e0f2f7; /* Biru Laut Terang */
 }
 
 .footer-bottom {
@@ -797,7 +838,6 @@ body {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     color: rgba(255, 255, 255, 0.6);
 }
-
 /* Responsive Design */
 @media (max-width: 1024px) {
     .hero-content {

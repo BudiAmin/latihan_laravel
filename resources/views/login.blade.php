@@ -5,15 +5,17 @@
     <title>Login - Pengaduan Masyarakat</title>
     <!-- Bulma CSS CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <style>
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+    <style>body {
+    background: #ffffff url('/images/background.svg') no-repeat center center;
+    background-size: cover; /* atau 'contain' jika ingin seluruh gambar terlihat */
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
 
         .login-container {
             backdrop-filter: blur(10px);

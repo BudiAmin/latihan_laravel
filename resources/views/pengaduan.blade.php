@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
         :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+           --primary-gradient: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
             --success-gradient: linear-gradient(45deg, #48c78e, #00d1b2);
             --warning-gradient: linear-gradient(45deg, #ffdd57, #ff9a00);
             --danger-gradient: linear-gradient(45deg, #ff3860, #ff1744);
@@ -16,7 +16,7 @@
         body {
             background: var(--primary-gradient);
             min-height: 100vh;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font    -family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         .main-container {
@@ -189,10 +189,10 @@
         }
 
         .button.is-primary {
-            background: var(--success-gradient);
-            color: white;
-            box-shadow: 0 4px 15px rgba(72, 199, 142, 0.3);
-        }
+    background: linear-gradient(135deg, #00c6ff, #0072ff); /* biru laut */
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 114, 255, 0.3);
+}
 
         .button.is-primary:hover {
             transform: translateY(-2px);
@@ -460,7 +460,28 @@
             align-items: center;
             gap: 0.5rem;
             font-size: 0.9rem;
+            
         }
+
+        .file.is-primary-laut .file-cta {
+    background: linear-gradient(135deg, #00c6ff, #0072ff); /* biru laut */
+    color: #fff;
+    border-color: transparent;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 8px rgba(0, 114, 255, 0.25);
+}
+
+.file.is-primary-laut .file-cta:hover {
+    background: linear-gradient(135deg, #0099ff, #005fcc);
+    box-shadow: 0 4px 12px rgba(0, 114, 255, 0.35);
+}
+
+.file.is-primary-laut .file-name {
+    border: 1px solid #0072ff;
+    color: #0072ff;
+    background-color: rgba(0, 198, 255, 0.05);
+}
+
     </style>
 </head>
 <body>
@@ -530,7 +551,8 @@
                     <div class="field">
                         <label class="label">Foto (opsional)</label>
                         <div class="control">
-                            <div class="file has-name is-boxed is-success">
+                            <div class="file has-name is-boxed is-primary-laut">
+
                                 <label class="file-label">
                                     <input class="file-input" type="file" name="foto" id="fileInput" accept="image/*" onchange="updateFileName()">
                                     <span class="file-cta">

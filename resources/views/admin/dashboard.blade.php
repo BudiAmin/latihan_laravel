@@ -9,19 +9,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #3b82f6;
-            --primary-hover: #2563eb;
+            --primary-color: #209cee; /* Sea Blue */
+            --primary-hover: #1a7bc2; /* Darker Sea Blue */
             --primary-light: #dbeafe;
             --success-color: #10b981;
             --danger-color: #ef4444;
             --warning-color: #f59e0b;
             --info-color: #06b6d4;
-            --background-gradient: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-            --sidebar-bg: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
-            --sidebar-item-hover: rgba(59, 130, 246, 0.1);
-            --sidebar-active: #3b82f6;
+            --background-gradient: #ffffff; /* Changed to white */
+            --sidebar-bg: #209cee; /* Changed to Sea Blue */
+            --sidebar-item-hover: rgba(32, 158, 238, 0.2); /* Lighter translucent blue for hover */
+            --sidebar-active: #1e8bc3; /* Darker blue for active state */
             --text-light: #f8fafc;
-            --text-muted: #94a3b8;
+            --text-muted: #e2e8f0; /* Adjusted for better contrast on blue sidebar */
             --border-color: #e2e8f0;
             --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --card-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
@@ -48,7 +48,7 @@
 
         .admin-sidebar {
             width: 280px;
-            background: var(--sidebar-bg);
+            background: var(--sidebar-bg); /* Sea Blue */
             color: var(--text-light);
             position: fixed;
             height: 100vh;
@@ -82,14 +82,14 @@
             width: 70px;
             height: 70px;
             border-radius: 16px;
-            background: linear-gradient(135deg, var(--primary-color), #8b5cf6);
+            background: #1a7bc2; /* Darker shade of sea blue */
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2rem;
             color: white;
             margin: 0 auto 1rem;
-            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 8px 25px rgba(32, 158, 238, 0.3);
         }
 
         .sidebar-header .title {
@@ -144,15 +144,15 @@
         }
 
         .sidebar-menu a:hover {
-            background-color: var(--sidebar-item-hover);
+            background-color: var(--sidebar-item-hover); /* Lighter translucent blue for hover */
             color: var(--text-light);
             transform: translateX(4px);
         }
 
         .sidebar-menu a.is-active {
-            background: linear-gradient(135deg, var(--sidebar-active), #8b5cf6);
+            background: var(--sidebar-active); /* Darker blue for active state */
             color: white;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 4px 12px rgba(32, 158, 238, 0.3);
         }
 
         .sidebar-menu a .icon {
@@ -173,6 +173,7 @@
             margin-left: 280px;
             padding: 2rem;
             transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: white; /* Changed to white */
         }
 
         .page-header {
@@ -226,7 +227,7 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(90deg, var(--primary-color), #8b5cf6);
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-hover)); /* Uses new primary colors */
         }
 
         .stat-header {
@@ -247,22 +248,22 @@
             color: white;
         }
 
-        .stat-icon.primary { background: linear-gradient(135deg, var(--primary-color), #8b5cf6); }
+        .stat-icon.primary { background: var(--primary-color); } /* Uses new primary color */
         .stat-icon.success { background: linear-gradient(135deg, var(--success-color), #06b6d4); }
         .stat-icon.warning { background: linear-gradient(135deg, var(--warning-color), #f97316); }
         .stat-icon.danger { background: linear-gradient(135deg, var(--danger-color), #dc2626); }
 
-        .stat-value {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #1e293b;
-        }
+     .stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: black; /* ubah jadi hitam */
+}
 
-        .stat-label {
-            color: var(--text-muted);
-            font-size: 0.875rem;
-            font-weight: 500;
-        }
+     .stat-label {
+    color: black; /* ubah jadi hitam juga */
+    font-size: 0.875rem;
+    font-weight: 500;
+}
 
         .content-card {
             background: white;
@@ -373,14 +374,14 @@
         }
 
         .button.is-primary {
-            background: linear-gradient(135deg, var(--primary-color), #8b5cf6);
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-hover)); /* Uses new primary colors */
             border: none;
             color: white;
         }
 
         .button.is-primary:hover {
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 4px 12px rgba(32, 158, 238, 0.3); /* Adjust shadow color */
         }
 
         .button.is-danger {
@@ -621,7 +622,6 @@
                 </div>
             @endif
 
-            <!-- Statistics Cards -->
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-header">
@@ -669,7 +669,6 @@
                 </div>
             </div>
 
-            <!-- Pengaduan Section -->
             <div id="pengaduan-section" class="content-card">
                 <div class="card-header">
                     <h2 class="card-title">Daftar Pengaduan</h2>
@@ -718,10 +717,6 @@
                                         </form>
                                     </td>
                                     <td>
-                                        {{-- <div class="buttons">
-                                            <a href="{{ route('admin.pengaduan.show', $p->id_pengaduan) }}" class="button is-info is-small">
-                                                <span class="icon"><i class="fas fa-eye"></i></span>
-                                            </a> --}}
                                         <form method="POST" action="{{ route('admin.pengaduan.destroy', $p->id_pengaduan) }}" onsubmit="return confirm('Apakah Anda yakin ingin menghapus pengaduan ini?')" style="display: inline;">
                                             @csrf
                                             @method('DELETE')
@@ -730,7 +725,6 @@
                                                 <span>Hapus</span>
                                             </button>
                                         </form>
-                                        </div>
                                     </td>
                                 </tr>
                                 @empty
@@ -747,7 +741,6 @@
                 </div>
             </div>
 
-            <!-- Users Section -->
             <div id="users-section" class="content-card">
                 <div class="card-header">
                     <h2 class="card-title">Manajemen Pengguna</h2>
@@ -780,30 +773,29 @@
                                     <td><span class="tag is-info">{{ ucfirst($user->role) }}</span></td>
                                     <td>
                                       <div class="buttons">
-                                {{-- Tombol Edit --}}
-                                    <a href="{{ route('admin.users.edit', $user->id_user) }}" class="button is-warning is-small">
-                                        <span class="icon">
-                                            <i class="fas fa-edit"></i>
-                                        </span>
-                                        <span>Edit</span>
-                                    </a>
-
-                                    {{-- Tombol Hapus --}}
-                                    <form method="POST"
-                                        action="{{ route('admin.users.destroy', $user->id_user) }}"
-                                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus pengguna ini?')"
-                                        style="display: inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="button is-danger is-small" type="submit">
+                                        {{-- Tombol Edit --}}
+                                        <a href="{{ route('admin.users.edit', $user->id_user) }}" class="button is-warning is-small">
                                             <span class="icon">
-                                                <i class="fas fa-trash"></i>
+                                                <i class="fas fa-edit"></i>
                                             </span>
-                                            <span>Hapus</span>
-                                        </button>
-                                    </form>
-                                </div>
+                                            <span>Edit</span>
+                                        </a>
 
+                                        {{-- Tombol Hapus --}}
+                                        <form method="POST"
+                                            action="{{ route('admin.users.destroy', $user->id_user) }}"
+                                            onsubmit="return confirm('Apakah Anda yakin ingin menghapus pengguna ini?')"
+                                            style="display: inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="button is-danger is-small" type="submit">
+                                                <span class="icon">
+                                                    <i class="fas fa-trash"></i>
+                                                </span>
+                                                <span>Hapus</span>
+                                            </button>
+                                        </form>
+                                    </div>
                                     </td>
                                 </tr>
                                 @empty
@@ -820,7 +812,6 @@
                 </div>
             </div>
 
-            <!-- Tanggapan Section -->
             <div id="tanggapan-section" class="content-card">
                 <div class="card-header">
                     <h2 class="card-title">Manajemen Tanggapan</h2>
@@ -857,12 +848,14 @@
                                         <div class="buttons">
                                             <a href="{{ route('admin.tanggapans.edit', $tanggapan->id_tanggapan) }}" class="button is-warning is-small">
                                                 <span class="icon"><i class="fas fa-edit"></i></span>
+                                                <span>Edit</span>
                                             </a>
                                             <form method="POST" action="{{ route('admin.tanggapans.destroy', $tanggapan->id_tanggapan) }}" onsubmit="return confirm('Apakah Anda yakin ingin menghapus tanggapan ini?')" style="display: inline;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="button is-danger is-small" type="submit">
                                                     <span class="icon"><i class="fas fa-trash"></i></span>
+                                                    <span>Hapus</span>
                                                 </button>
                                             </form>
                                         </div>
@@ -882,7 +875,6 @@
                 </div>
             </div>
 
-            <!-- Password Reset Tokens Section -->
             <div id="password-reset-section" class="content-card">
                 <div class="card-header">
                     <h2 class="card-title">Password Reset Tokens</h2>

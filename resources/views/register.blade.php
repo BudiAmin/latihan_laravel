@@ -6,15 +6,17 @@
     <!-- Bulma CSS CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <style>
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 1rem 0;
-        }
+     body {
+    background: #ffffff url('/images/BG_2.jpg') no-repeat center center;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 1rem 0;
+}
+
 
         .register-container {
             backdrop-filter: blur(10px);
@@ -34,13 +36,14 @@
         }
 
         .register-header {
-            background: linear-gradient(45deg, #48c78e, #00d1b2);
-            color: white;
-            padding: 2rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
+    background: linear-gradient(45deg, #00c6ff, #0072ff); /* biru laut */
+    color: white;
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
 
         .register-header::before {
             content: '';
@@ -114,22 +117,23 @@
             margin-bottom: 0.5rem;
         }
 
-        .button.is-success {
-            background: linear-gradient(45deg, #48c78e, #00d1b2);
-            border: none;
-            border-radius: 12px;
-            padding: 1rem 2rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(72, 199, 142, 0.3);
-        }
+       .button.is-success {
+    background: linear-gradient(45deg, #00c6ff, #0072ff); /* gradasi biru laut */
+    border: none;
+    border-radius: 12px;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 114, 255, 0.3);
+}
 
-        .button.is-success:hover {
-            background: linear-gradient(45deg, #3ec487, #00c4a7);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(72, 199, 142, 0.4);
-        }
+.button.is-success:hover {
+    background: linear-gradient(45deg, #0099ff, #005fcc); /* efek hover sedikit lebih gelap */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 114, 255, 0.4);
+}
+
 
         .button.is-success:active {
             transform: translateY(0);
@@ -176,16 +180,17 @@
         }
 
         .login-link a {
-            color: #48c78e;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
+    color: #0072ff; /* biru laut */
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
 
-        .login-link a:hover {
-            color: #00d1b2;
-            text-decoration: underline;
-        }
+.login-link a:hover {
+    color: #005fcc; /* biru laut lebih gelap saat hover */
+    text-decoration: underline;
+}
+
 
         /* Progress indicator */
         .form-progress {
