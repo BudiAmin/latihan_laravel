@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login - Pengaduan Masyarakat</title>
+    <title>Lupa Kata Sandi - Pengaduan Masyarakat</title>
     <!-- Bulma CSS CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <style>body {
-    background: #ffffff url('/images/background.svg') no-repeat center center;
-    background-size: cover; /* atau 'contain' jika ingin seluruh gambar terlihat */
+    <style>
+       body {
+    background: #ffffff url('/images/Bg_1.jpg') no-repeat center center;
+    background-size: cover;
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -15,9 +16,7 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-
-
-        .login-container {
+        .container-box {
             backdrop-filter: blur(10px);
             background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
@@ -27,21 +26,23 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .login-container:hover {
+        .container-box:hover {
             transform: translateY(-5px);
             box-shadow: 0 35px 70px rgba(0, 0, 0, 0.2);
         }
 
-        .login-header {
+        .header-section {
             background: linear-gradient(45deg, #3273dc, #209cee);
             color: white;
             padding: 2rem;
             text-align: center;
             position: relative;
             overflow: hidden;
+            border-top-left-radius: 20px; /* Tambahkan ini agar sudut atas melengkung */
+            border-top-right-radius: 20px; /* Tambahkan ini agar sudut atas melengkung */
         }
 
-        .login-header::before {
+        .header-section::before {
             content: '';
             position: absolute;
             top: -50%;
@@ -58,7 +59,7 @@
             100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
 
-        .login-header h1 {
+        .header-section h1 {
             font-size: 2.5rem;
             font-weight: 700;
             margin: 0;
@@ -66,14 +67,7 @@
             z-index: 1;
         }
 
-        .login-header .subtitle {
-            margin-top: 0.5rem;
-            opacity: 0.9;
-            position: relative;
-            z-index: 1;
-        }
-
-        .login-form {
+        .form-section {
             padding: 2.5rem;
         }
 
@@ -84,7 +78,7 @@
         .input {
             border-radius: 12px;
             border: 2px solid #e8e8e8;
-            padding: 1rem 1rem 1rem 3rem;
+            padding: 1rem 1rem 1rem 3rem; /* Sesuaikan padding untuk icon */
             font-size: 1rem;
             transition: all 0.3s ease;
             background: rgba(255, 255, 255, 0.9);
@@ -134,6 +128,12 @@
             transform: translateY(0);
         }
 
+        .notification.is-success {
+            border-radius: 12px;
+            border-left: 4px solid #23d160;
+            background: rgba(35, 209, 96, 0.1);
+            animation: slideIn 0.3s ease;
+        }
         .notification.is-danger {
             border-radius: 12px;
             border-left: 4px solid #ff3860;
@@ -146,110 +146,59 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .register-link {
-            text-align: center;
-            padding: 1.5rem;
-            background: rgba(248, 249, 250, 0.8);
-            border-top: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .register-link a {
-            color: #3273dc;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .register-link a:hover {
-            color: #209cee;
-            text-decoration: underline;
-        }
-
-        /* Floating animation for decorative elements */
-        .floating-shape {
-            position: absolute;
-            opacity: 0.1;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .floating-shape:nth-child(1) {
-            top: 20%;
-            left: 10%;
-            animation-delay: 0s;
-        }
-
-        .floating-shape:nth-child(2) {
-            top: 60%;
-            right: 10%;
-            animation-delay: 2s;
-        }
-
-        .floating-shape:nth-child(3) {
-            bottom: 20%;
-            left: 20%;
-            animation-delay: 4s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
-        }
-
         /* Responsive adjustments */
         @media (max-width: 768px) {
-            .login-container {
+            .container-box {
                 margin: 1rem;
                 border-radius: 15px;
             }
             
-            .login-header {
+            .header-section {
                 padding: 1.5rem;
             }
             
-            .login-header h1 {
+            .header-section h1 {
                 font-size: 2rem;
             }
             
-            .login-form {
+            .form-section {
                 padding: 2rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Floating decorative shapes -->
-    <div class="floating-shape">
-        <i class="fas fa-circle" style="font-size: 60px; color: white;"></i>
-    </div>
-    <div class="floating-shape">
-        <i class="fas fa-square" style="font-size: 40px; color: white;"></i>
-    </div>
-    <div class="floating-shape">
-        <i class="fas fa-triangle" style="font-size: 50px; color: white;"></i>
-    </div>
-
     <section class="section" style="width: 100%;">
         <div class="container">
             <div class="columns is-centered">
                 <div class="column is-5-tablet is-4-desktop is-4-widescreen">
-                    <div class="login-container">
+                    <div class="container-box">
                         <!-- Header Section -->
-                        <div class="login-header">
-                            <h1 class="title has-text-white">Selamat Datang</h1>
-                            <p class="subtitle has-text-white">Sistem Pengaduan Masyarakat</p>
+                        <div class="header-section">
+                            <h1 class="title has-text-white">Lupa Kata Sandi</h1>
                         </div>
 
                         <!-- Form Section -->
-                        <div class="login-form">
-                            {{-- Menampilkan pesan error jika login gagal --}}
-                            @if(session('error'))
-                                <div class="notification is-danger">
-                                    <i class="fas fa-exclamation-triangle"></i>
-                                    {{ session('error') }}
+                        <div class="form-section">
+                            {{-- Menampilkan pesan sukses dari session (misal: "Link reset password telah dikirim!") --}}
+                            @if (session('status'))
+                                <div class="notification is-success">
+                                    {{ session('status') }}
                                 </div>
                             @endif
 
-                            <form method="POST" action="{{ route('login') }}">
+                            {{-- Menampilkan pesan error validasi --}}
+                            @if ($errors->any())
+                                <div class="notification is-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+
+                            <form method="POST" action="{{ route('password.email') }}">
                                 @csrf
 
                                 {{-- Email --}}
@@ -258,48 +207,27 @@
                                         <i class="fas fa-envelope"></i> Alamat Email
                                     </label>
                                     <div class="control has-icons-left">
-                                        <input class="input" type="email" name="email" placeholder="Masukkan email Anda" required>
+                                        <input class="input" type="email" name="email" placeholder="Masukkan email terdaftar Anda" value="{{ old('email') }}" required autofocus>
                                         <span class="icon is-small is-left">
                                             <i class="fas fa-envelope"></i>
                                         </span>
                                     </div>
+                                    @error('email')
+                                        <p class="help is-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
 
-                                {{-- Password --}}
-                                <div class="field">
-                                    <label class="label">
-                                        <i class="fas fa-lock"></i> Kata Sandi
-                                    </label>
-                                    <div class="control has-icons-left">
-                                        <input class="input" type="password" name="password" placeholder="Masukkan kata sandi" required>
-                                        <span class="icon is-small is-left">
-                                            <i class="fas fa-lock"></i>
-                                        </span>
-                                    </div>
-                                </div>
-
-                                {{-- Tombol Login --}}
+                                {{-- Tombol Kirim Link Reset --}}
                                 <div class="field">
                                     <button type="submit" class="button is-primary is-fullwidth">
-                                        <i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;Masuk ke Sistem
+                                        <i class="fas fa-envelope-open-text"></i>&nbsp;&nbsp;Kirim Link Reset Kata Sandi
                                     </button>
                                 </div>
                             </form>
-                        </div>
-                        {{-- TAUTAN LUPA KATA SANDI INI YANG BENAR UNTUK DI HALAMAN LOGIN --}}
-                        <div class="has-text-centered mt-4">
-                            <a href="{{ route('password.request') }}">Lupa Kata Sandi?</a>
-                        </div>
-                        {{-- <div class="field"> --}}
-                            {{-- Tautan "Ubah Kata Sandi" dihapus dari sini karena ini untuk user yang sudah login --}}
-                            {{-- <a href="{{ route('user.change-password.form') }}">Ubah Kata Sandi</a> --}}
-                        {{-- </div> --}}
-
-                        <!-- Register Link Section -->
-                        <div class="register-link">
-                            <p>Belum memiliki akun? <a href="{{ route('register') }}">
-                                <i class="fas fa-user-plus"></i> Daftar Sekarang
-                            </a></p>
+                            
+                            <div class="has-text-centered mt-4">
+                                <a href="{{ route('login') }}">Kembali ke Login</a>
+                            </div>
                         </div>
                     </div>
                 </div>

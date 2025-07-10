@@ -141,7 +141,7 @@
                     </div>
                 </div>
                 <div class="about-image">
-                    <img src="{{ asset('images/logo_city.png') }}" alt="Kota Cimahi">
+                    <img src="{{ asset('images/logo_citra.png') }}" alt="Kota Cimahi">
                 </div>
             </div>
         </div>
@@ -201,7 +201,7 @@
                         <i class="fas fa-map-marker-alt"></i>
                         <div>
                             <h4>Alamat</h4>
-                            <p>Jl. Baros No.45, Baros, Kec. Cimahi Tengah, Kota Cimahi, Jawa Barat 40521</p>
+                            <p> Jl. Jati Serut No.12, Cibabat, Kec. Cimahi Utara, Kota Cimahi, Jawa Barat 40513</p>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -219,23 +219,23 @@
                         </div>
                     </div>
                 </div>
-                <div class="contact-form">
-                    <form>
-                        <div class="form-group">
-                            <input type="text" placeholder="Nama Lengkap" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" placeholder="Email" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea placeholder="Pesan Anda" rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-paper-plane"></i>
-                            Kirim Pesan
-                        </button>
-                    </form>
+               <div class="contact-form">
+            <form action="send_email.php" method="POST">
+                <div class="form-group">
+                    <input type="text" name="nama" placeholder="Nama Lengkap" required>
                 </div>
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <textarea name="pesan" placeholder="Pesan Anda" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-paper-plane"></i>
+                    Kirim Pesan
+                </button>
+             </form>
+        </div>
             </div>
         </div>
     </section>
@@ -251,10 +251,10 @@
                     </div>
                     <p>Sistem Pengaduan Masyarakat Kota Cimahi untuk pelayanan yang lebih baik.</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        {{-- <a href="#"><i class="fab fa-facebook"></i></a> --}}
+                        <a href="https://www.tiktok.com/@kec.cimahi.utara"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.instagram.com/keccimahiutara/"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com/@kecamatancimahiutara5780?feature=shared"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
                 <div class="footer-section">
@@ -266,15 +266,15 @@
                         <li><a href="#kontak">Kontak</a></li>
                     </ul>
                 </div>
-                <div class="footer-section">
-                    <h4>Layanan</h4>
+                {{-- <div class="footer-section"> --}}
+                    {{-- <h4>Layanan</h4> --}}
                     {{-- <ul>
                         <li><a href="{{ route('pengaduan.create') }}">Buat Pengaduan</a></li>
                         <li><a href="{{ route('pengaduan.cek') }}">Cek Status</a></li>
                         <li><a href="{{ route('faq') }}">FAQ</a></li>
                         <li><a href="{{ route('panduan') }}">Panduan</a></li>
                     </ul> --}}
-                </div>
+                {{-- </div> --}}
                 <div class="footer-section">
                     <h4>Jam Pelayanan</h4>
                     <div class="schedule">

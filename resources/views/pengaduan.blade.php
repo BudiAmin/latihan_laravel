@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <title>Dashboard - Pengaduan Masyarakat</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
         :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+           --primary-gradient: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
             --success-gradient: linear-gradient(45deg, #48c78e, #00d1b2);
             --warning-gradient: linear-gradient(45deg, #ffdd57, #ff9a00);
             --danger-gradient: linear-gradient(45deg, #ff3860, #ff1744);
@@ -15,7 +16,7 @@
         body {
             background: var(--primary-gradient);
             min-height: 100vh;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font    -family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         .main-container {
@@ -188,10 +189,10 @@
         }
 
         .button.is-primary {
-            background: var(--success-gradient);
-            color: white;
-            box-shadow: 0 4px 15px rgba(72, 199, 142, 0.3);
-        }
+    background: linear-gradient(135deg, #00c6ff, #0072ff); /* biru laut */
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 114, 255, 0.3);
+}
 
         .button.is-primary:hover {
             transform: translateY(-2px);
@@ -271,13 +272,13 @@
             letter-spacing: 0.5px;
         }
 
-        .status-pending {
+        .status-menunggu { /* Changed from status-pending to status-menunggu */
             background: rgba(255, 221, 87, 0.2);
             color: #ff9a00;
             border: 1px solid rgba(255, 221, 87, 0.5);
         }
 
-        .status-proses {
+        .status-diproses { /* Changed from status-proses to status-diproses */
             background: rgba(50, 115, 220, 0.2);
             color: #3273dc;
             border: 1px solid rgba(50, 115, 220, 0.5);
@@ -408,12 +409,84 @@
             font-size: 2rem;
             cursor: pointer;
         }
+
+        /* Tanggapan section styles (NEW) */
+        .tanggapan-section {
+            border-top: 1px solid #e0e4eb;
+            padding-top: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .tanggapan-section h4 {
+            color: #363636;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.1rem; /* Adjust title size */
+            font-weight: 600;
+        }
+
+        .tanggapan-card {
+            background-color: #f8fafc;
+            border-left: 4px solid #3273dc; /* Bulma info blue */
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .tanggapan-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .tanggapan-card p.content {
+            color: #4a4a4a;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .tanggapan-card p.is-size-7 {
+            font-size: 0.8rem;
+            color: #7a7a7a;
+        }
+
+        /* Notification for no response (NEW) */
+        .notification.is-info.is-light.is-size-7 {
+            background-color: #e6f3ff;
+            color: #209cee;
+            border-left-color: #209cee;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            
+        }
+
+        .file.is-primary-laut .file-cta {
+    background: linear-gradient(135deg, #00c6ff, #0072ff); /* biru laut */
+    color: #fff;
+    border-color: transparent;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 8px rgba(0, 114, 255, 0.25);
+}
+
+.file.is-primary-laut .file-cta:hover {
+    background: linear-gradient(135deg, #0099ff, #005fcc);
+    box-shadow: 0 4px 12px rgba(0, 114, 255, 0.35);
+}
+
+.file.is-primary-laut .file-name {
+    border: 1px solid #0072ff;
+    color: #0072ff;
+    background-color: rgba(0, 198, 255, 0.05);
+}
+
     </style>
 </head>
 <body>
     <div class="main-container">
         <div class="container">
-            <!-- Dashboard Header -->
             <div class="dashboard-header">
                 <div class="welcome-section">
                     <div class="welcome-text">
@@ -422,14 +495,14 @@
                     </div>
                     <div class="header-actions">
                         <div class="has-text-right">
-                            <p class="has-text-weight-semibold">{{ date('d F Y') }}</p>
-                            <p class="has-text-grey">{{ date('H:i') }} WIB</p>
+                            {{-- MENGGUNAKAN CARBON UNTUK WAKTU SAAT INI DI DASHBOARD --}}
+                            <p class="has-text-weight-semibold">{{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</p>
+                            <p class="has-text-grey">{{ \Carbon\Carbon::now()->translatedFormat('H:i') }} WIB</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Success Notification -->
             @if(session('success'))
                 <div class="notification is-success">
                     <i class="fas fa-check-circle"></i>
@@ -437,7 +510,6 @@
                 </div>
             @endif
 
-            <!-- Form Section -->
             <div class="form-container">
                 <h2 class="section-title">
                     <i class="fas fa-plus-circle"></i>
@@ -476,25 +548,26 @@
                             <input class="input" type="text" name="lokasi" placeholder="Contoh: Jl. Sudirman No. 123, Jakarta">
                         </div>
                     </div>
-                      <div class="field">
-                            <label class="label">Foto (opsional)</label>
-                            <div class="control">
-                                <div class="file has-name is-boxed is-success">
-                                    <label class="file-label">
-                                        <input class="file-input" type="file" name="foto" id="fileInput" accept="image/*" onchange="updateFileName()">
-                                        <span class="file-cta">
-                                            <span class="file-icon">
-                                                <i class="fas fa-upload"></i>
-                                            </span>
-                                            <span class="file-label">
-                                                Pilih Foto
-                                            </span>
+                    <div class="field">
+                        <label class="label">Foto (opsional)</label>
+                        <div class="control">
+                            <div class="file has-name is-boxed is-primary-laut">
+
+                                <label class="file-label">
+                                    <input class="file-input" type="file" name="foto" id="fileInput" accept="image/*" onchange="updateFileName()">
+                                    <span class="file-cta">
+                                        <span class="file-icon">
+                                            <i class="fas fa-upload"></i>
                                         </span>
-                                        <span class="file-name" id="fileName" style="max-width: 250px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                            Belum ada file dipilih
+                                        <span class="file-label">
+                                            Pilih Foto
                                         </span>
-                                    </label>
-                                </div>
+                                    </span>
+                                    <span class="file-name" id="fileName" style="max-width: 250px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                        Belum ada file dipilih
+                                    </span>
+                                </label>
+                            </div>
                             <p class="help">Format: JPG, PNG, maksimal 2MB</p>
                         </div>
                     </div>
@@ -507,7 +580,6 @@
                 </form>
             </div>
 
-            <!-- History Section -->
             <div class="history-container">
                 <h2 class="section-title">
                     <i class="fas fa-history"></i>
@@ -531,12 +603,32 @@
                         </div>
                         
                         <div class="complaint-meta">
-                            <span><i class="fas fa-calendar"></i> {{ date('d F Y', strtotime($item->tanggal_pengaduan)) }}</span>
-                            <span><i class="fas fa-clock"></i> {{ date('H:i', strtotime($item->tanggal_pengaduan)) }} WIB</span>
+                            {{-- MENGGUNAKAN CARBON UNTUK TANGGAL DAN WAKTU PENGADUAN DENGAN PENGECEKAN NULL --}}
+                            <span><i class="fas fa-calendar"></i> {{ $item->tanggal_pengaduan ? $item->tanggal_pengaduan->translatedFormat('d F Y') : 'Tanggal tidak tersedia' }}</span>
+                            <span><i class="fas fa-clock"></i> {{ $item->tanggal_pengaduan ? $item->tanggal_pengaduan->translatedFormat('H:i') : 'Waktu tidak tersedia' }} WIB</span>
                         </div>
                         
                         @if($item->foto)
-                            <img src="{{ asset('storage/' . $item->foto) }}" class="complaint-image" onclick="openImageModal(this.src)" alt="Foto pengaduan">
+                            <img src="{{ Storage::url($item->foto) }}" class="complaint-image" onclick="openImageModal(this.src)" alt="Foto pengaduan">
+                        @endif
+
+                        {{-- Bagian untuk menampilkan tanggapan admin (NEW) --}}
+                        @if($item->tanggapan->isNotEmpty())
+                            <div class="tanggapan-section mt-4">
+                                <h4 class="title is-6 mb-3"><i class="fas fa-comment-dots"></i> Tanggapan Admin:</h4>
+                                @foreach($item->tanggapan as $tanggapan)
+                                    <div class="tanggapan-card">
+                                        <p class="is-size-7 has-text-grey-dark mb-1">
+                                            Dari: <strong>{{ $tanggapan->admin->nama ?? 'Admin Tidak Diketahui' }}</strong> pada {{ $tanggapan->tanggal_tanggapan->translatedFormat('d M Y, H:i') }} WIB
+                                        </p>
+                                        <p class="content is-small">{{ $tanggapan->isi_tanggapan }}</p>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @else
+                            <div class="notification is-info is-light is-size-7 mt-4">
+                                <i class="fas fa-info-circle"></i> Belum ada tanggapan untuk pengaduan ini.
+                            </div>
                         @endif
                     </div>
                 @empty
@@ -548,7 +640,6 @@
                 @endforelse
             </div>
 
-            <!-- Logout Section -->
             <div class="logout-section">
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
@@ -561,13 +652,11 @@
         </div>
     </div>
 
-    <!-- Image Modal -->
     <div class="image-modal" id="imageModal" onclick="closeImageModal()">
         <span class="close">&times;</span>
         <img id="modalImage" src="" alt="Foto pengaduan">
     </div>
 
-    <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/a2e0e6cfd7.js" crossorigin="anonymous"></script>
     
     <script>

@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Contracts\Auth\CanResetPassword; // Add this
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements CanResetPassword // Implement the interface
 {
     use HasFactory, Notifiable;
+    use \Illuminate\Auth\Passwords\CanResetPassword; // Add this trait
 
     protected $primaryKey = 'id_user';
 
