@@ -1,408 +1,252 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Register - Pengaduan Masyarakat</title>
-    <!-- Bulma CSS CDN -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar - Pengaduan Masyarakat Kota Cimahi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a2e0e6cfd7.js" crossorigin="anonymous"></script>
     <style>
-     body {
-    background: #ffffff url('/images/BG_2.jpg') no-repeat center center;
-    background-size: cover;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    padding: 1rem 0;
-}
-
-
-        .register-container {
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            max-width: 500px;
-            width: 100%;
+        body {
+            background-color: #eee;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        .register-container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 35px 70px rgba(0, 0, 0, 0.2);
+        .gradient-custom-2 {
+            /* fallback for old browsers */
+            background: #4169E1; /* Royal Blue as a fallback */
+
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: -webkit-linear-gradient(to right, #4169E1, #00BFFF); /* Royal Blue to Deep Sky Blue */
+
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background: linear-gradient(to right, #4169E1, #00BFFF); /* Royal Blue to Deep Sky Blue */
         }
 
-        .register-header {
-    background: linear-gradient(45deg, #00c6ff, #0072ff); /* biru laut */
-    color: white;
-    padding: 2rem;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-}
-
-
-        .register-header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transform: rotate(45deg);
-            animation: shimmer 3s infinite;
+        @media (min-width: 768px) {
+            .gradient-form {
+                height: 100vh !important;
+            }
+        }
+        @media (min-width: 769px) {
+            .gradient-custom-2 {
+                border-top-left-radius: .3rem;
+                border-bottom-left-radius: .3rem;
+            }
         }
 
-        @keyframes shimmer {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        .card {
+            border-radius: 1rem;
         }
 
-        .register-header h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin: 0;
-            position: relative;
-            z-index: 1;
-        }
-
-        .register-header .subtitle {
-            margin-top: 0.5rem;
-            opacity: 0.9;
-            position: relative;
-            z-index: 1;
-        }
-
-        .register-form {
+        .card-body {
             padding: 2.5rem;
         }
 
-        .field {
-            margin-bottom: 1.5rem;
+        .text-center img {
+            width: 185px; /* Sesuaikan ukuran jika diperlukan */
+            height: auto;
+            display: block;
+            margin: 0 auto 1rem;
         }
 
-        .input {
-            border-radius: 12px;
-            border: 2px solid #e8e8e8;
-            padding: 1rem 1rem 1rem 3rem;
+        .form-outline .form-control {
+            padding: 0.75rem 1rem;
             font-size: 1rem;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.9);
         }
 
-        .input:focus {
-            border-color: #48c78e;
-            box-shadow: 0 0 0 3px rgba(72, 199, 142, 0.1);
-            background: white;
-            transform: translateY(-2px);
-        }
-
-        .control.has-icons-left .icon {
-            color: #48c78e;
-            transition: all 0.3s ease;
-        }
-
-        .input:focus + .icon {
-            color: #00d1b2;
-            transform: scale(1.1);
-        }
-
-        .label {
+        .form-outline .form-label {
             font-weight: 600;
-            color: #363636;
-            margin-bottom: 0.5rem;
         }
 
-       .button.is-success {
-    background: linear-gradient(45deg, #00c6ff, #0072ff); /* gradasi biru laut */
-    border: none;
-    border-radius: 12px;
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 114, 255, 0.3);
-}
+        .btn-primary.btn-block {
+            padding: 0.75rem 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 0.5rem;
+        }
 
-.button.is-success:hover {
-    background: linear-gradient(45deg, #0099ff, #005fcc); /* efek hover sedikit lebih gelap */
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 114, 255, 0.4);
-}
-
-
-        .button.is-success:active {
-            transform: translateY(0);
+        .notification {
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .notification.is-danger {
-            border-radius: 12px;
-            border-left: 4px solid #ff3860;
-            background: rgba(255, 56, 96, 0.1);
-            animation: slideIn 0.3s ease;
-            margin-bottom: 1.5rem;
+            background-color: #fce2e2;
+            color: #9b2c2c;
+            border: 1px solid #dc3545;
         }
 
-        .notification.is-danger ul {
+        .notification.is-success {
+            background-color: #e8f5e8;
+            color: #2d7d2d;
+            border: 1px solid #28a745;
+        }
+
+        .password-requirements {
+            font-size: 0.875rem;
+            color: #6c757d;
+            margin-top: 0.25rem;
+        }
+
+        .password-requirements ul {
             margin: 0;
-            padding: 0;
-            list-style: none;
+            padding-left: 1.2rem;
         }
 
-        .notification.is-danger li {
-            padding: 0.25rem 0;
-            position: relative;
-            padding-left: 1.5rem;
+        .password-requirements li {
+            margin-bottom: 0.2rem;
         }
 
-        .notification.is-danger li::before {
-            content: '⚠';
-            position: absolute;
-            left: 0;
-            color: #ff3860;
-            font-weight: bold;
+        .password-requirements li.valid {
+            color: #28a745;
         }
 
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .password-requirements li.invalid {
+            color: #dc3545;
         }
 
-        .login-link {
-            text-align: center;
-            padding: 1.5rem;
-            background: rgba(248, 249, 250, 0.8);
-            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        .form-control.is-invalid {
+            border-color: #dc3545;
         }
 
-        .login-link a {
-    color: #0072ff; /* biru laut */
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.login-link a:hover {
-    color: #005fcc; /* biru laut lebih gelap saat hover */
-    text-decoration: underline;
-}
-
-
-        /* Progress indicator */
-        .form-progress {
-            height: 4px;
-            background: rgba(72, 199, 142, 0.2);
-            border-radius: 2px;
-            margin-bottom: 1rem;
-            overflow: hidden;
+        .form-control.is-valid {
+            border-color: #28a745;
         }
 
-        .form-progress-bar {
-            height: 100%;
-            background: linear-gradient(45deg, #48c78e, #00d1b2);
-            width: 0%;
-            transition: width 0.3s ease;
-            border-radius: 2px;
+        .invalid-feedback {
+            display: block;
+            font-size: 0.875rem;
+            color: #dc3545;
+            margin-top: 0.25rem;
         }
 
-        /* Floating animation for decorative elements */
-        .floating-shape {
-            position: absolute;
-            opacity: 0.1;
-            animation: float 6s ease-in-out infinite;
+        .back-to-login {
+            display: block;
+            margin-top: 10px;
+            color: #6c757d !important;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
         }
 
-        .floating-shape:nth-child(1) {
-            top: 15%;
-            left: 10%;
-            animation-delay: 0s;
-        }
-
-        .floating-shape:nth-child(2) {
-            top: 70%;
-            right: 10%;
-            animation-delay: 2s;
-        }
-
-        .floating-shape:nth-child(3) {
-            bottom: 15%;
-            left: 15%;
-            animation-delay: 4s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
-        }
-
-        /* Form field animations */
-        .field {
-            position: relative;
-        }
-
-        .field.is-focused .label {
-            color: #48c78e;
-            transform: translateY(-2px);
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .register-container {
-                margin: 1rem;
-                border-radius: 15px;
-            }
-            
-            .register-header {
-                padding: 1.5rem;
-            }
-            
-            .register-header h1 {
-                font-size: 2rem;
-            }
-            
-            .register-form {
-                padding: 2rem;
-            }
-        }
-
-        /* Success state animations */
-        .field.is-valid .input {
-            border-color: #48c78e;
-            background: rgba(72, 199, 142, 0.05);
-        }
-
-        .field.is-valid .control::after {
-            content: '✓';
-            position: absolute;
-            right: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #48c78e;
-            font-weight: bold;
-            animation: checkmark 0.3s ease;
-        }
-
-        @keyframes checkmark {
-            0% { opacity: 0; transform: translateY(-50%) scale(0); }
-            100% { opacity: 1; transform: translateY(-50%) scale(1); }
+        .back-to-login:hover {
+            color: #0056b3 !important;
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <!-- Floating decorative shapes -->
-    <div class="floating-shape">
-        <i class="fas fa-circle" style="font-size: 60px; color: white;"></i>
-    </div>
-    <div class="floating-shape">
-        <i class="fas fa-hexagon" style="font-size: 40px; color: white;"></i>
-    </div>
-    <div class="floating-shape">
-        <i class="fas fa-star" style="font-size: 50px; color: white;"></i>
-    </div>
-
-    <section class="section" style="width: 100%;">
-        <div class="container">
-            <div class="columns is-centered">
-                <div class="column is-6-tablet is-5-desktop is-4-widescreen">
-                    <div class="register-container">
-                        <!-- Header Section -->
-                        <div class="register-header">
-                            <h1 class="title has-text-white">Bergabung</h1>
-                            <p class="subtitle has-text-white">Daftar Akun Baru</p>
-                        </div>
-
-                        <!-- Form Section -->
-                        <div class="register-form">
-                            <!-- Progress Indicator -->
-                            <div class="form-progress">
-                                <div class="form-progress-bar" id="progressBar"></div>
+    <section class="h-100 gradient-form">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-xl-10">
+                    <div class="card rounded-3 text-black">
+                        <div class="row g-0">
+                            <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                                <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                                    <h4 class="mb-4">Bergabung dengan Sistem Pengaduan Masyarakat</h4>
+                                    <p class="small mb-0">Daftarkan diri Anda untuk dapat menyampaikan aspirasi dan keluhan terkait pelayanan publik di Kecamatan Cimahi Utara. Bersama-sama kita wujudkan pemerintahan yang transparan dan responsif.</p>
+                                </div>
                             </div>
-
-                            {{-- Menampilkan error validasi --}}
-                            @if ($errors->any())
-                                <div class="notification is-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
-
-                            <form method="POST" action="{{ route('register') }}" id="registerForm">
-                                @csrf
-
-                                {{-- Nama --}}
-                                <div class="field">
-                                    <label class="label">
-                                        <i class="fas fa-user"></i> Nama Lengkap
-                                    </label>
-                                    <div class="control has-icons-left">
-                                        <input class="input" type="text" name="nama" value="{{ old('nama') }}" placeholder="Masukkan nama lengkap" required>
-                                        <span class="icon is-small is-left">
-                                            <i class="fas fa-user"></i>
-                                        </span>
+                            <div class="col-lg-6">
+                                <div class="card-body p-md-5 mx-md-4">
+                                    <div class="text-center">
+                                        <img src="images/logo_citra.png" class="img-fluid"
+                                             alt="Lambang Kota Cimahi">
+                                        <h4 class="mt-1 mb-5 pb-1">Buat Akun Baru</h4>
                                     </div>
-                                </div>
 
-                                {{-- Email --}}
-                                <div class="field">
-                                    <label class="label">
-                                        <i class="fas fa-envelope"></i> Alamat Email
-                                    </label>
-                                    <div class="control has-icons-left">
-                                        <input class="input" type="email" name="email" value="{{ old('email') }}" placeholder="Masukkan alamat email" required>
-                                        <span class="icon is-small is-left">
-                                            <i class="fas fa-envelope"></i>
-                                        </span>
-                                    </div>
-                                </div>
+                                    @if(session('error'))
+                                        <div class="notification is-danger">
+                                            <i class="fas fa-exclamation-triangle"></i>
+                                            {{ session('error') }}
+                                        </div>
+                                    @endif
 
-                                {{-- Password --}}
-                                <div class="field">
-                                    <label class="label">
-                                        <i class="fas fa-lock"></i> Kata Sandi
-                                    </label>
-                                    <div class="control has-icons-left">
-                                        <input class="input" type="password" name="password" placeholder="Masukkan kata sandi" required>
-                                        <span class="icon is-small is-left">
-                                            <i class="fas fa-lock"></i>
-                                        </span>
-                                    </div>
-                                    <p class="help">Kata sandi minimal 8 karakter</p>
-                                </div>
-                                <div class="field">
-                                    <label class="label">
-                                        <i class="fas fa-lock"></i> Konfirmasi Kata Sandi
-                                    </label>
-                                    <div class="control has-icons-left">
-                                        <input class="input" type="password" name="password_confirmation" placeholder="Ulangi kata sandi" required>
-                                        <span class="icon is-small is-left">
-                                            <i class="fas fa-lock"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                                {{-- Role (opsional, default masyarakat) --}}
-                                <input type="hidden" name="role" value="masyarakat">
+                                    @if(session('success'))
+                                        <div class="notification is-success">
+                                            <i class="fas fa-check-circle"></i>
+                                            {{ session('success') }}
+                                        </div>
+                                    @endif
 
-                                {{-- Tombol Daftar --}}
-                                <div class="field">
-                                    <button type="submit" class="button is-success is-fullwidth">
-                                        <i class="fas fa-user-plus"></i>&nbsp;&nbsp;Daftar Sekarang
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
+                                    <form method="POST" action="{{ route('register') }}" id="registerForm">
+                                        @csrf
+                                        <p>Silakan isi data berikut untuk membuat akun</p>
 
-                        <!-- Login Link Section -->
-                        <div class="login-link">
-                            <p>Sudah memiliki akun? <a href="{{ route('login') }}">
-                                <i class="fas fa-sign-in-alt"></i> Masuk di Sini
-                            </a></p>
+                                        <div class="form-outline mb-4">
+                                            <input type="text" id="nama" name="nama" class="form-control @error('nama') is-invalid @enderror"
+                                                   placeholder="Nama Lengkap" value="{{ old('nama') }}" required />
+                                            <label class="form-label" for="nama">Nama Lengkap</label>
+                                            @error('nama')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="form-outline mb-4">
+                                            <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror"
+                                                   placeholder="Alamat Email" value="{{ old('email') }}" required />
+                                            <label class="form-label" for="email">Email</label>
+                                            @error('email')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="form-outline mb-4">
+                                            <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror"
+                                                   placeholder="Kata Sandi" required />
+                                            <label class="form-label" for="password">Kata Sandi</label>
+                                            <div class="password-requirements">
+                                                <ul>
+                                                    <li id="length-check">Minimal 8 karakter</li>
+                                                    <li id="uppercase-check">Minimal 1 huruf besar</li>
+                                                    <li id="lowercase-check">Minimal 1 huruf kecil</li>
+                                                    <li id="number-check">Minimal 1 angka</li>
+                                                </ul>
+                                            </div>
+                                            @error('password')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="form-outline mb-4">
+                                            <input type="password" id="password_confirmation" name="password_confirmation" class="form-control"
+                                                   placeholder="Konfirmasi Kata Sandi" required />
+                                            <label class="form-label" for="password_confirmation">Konfirmasi Kata Sandi</label>
+                                            <div id="password-match-feedback" class="invalid-feedback" style="display: none;">
+                                                Kata sandi tidak cocok
+                                            </div>
+                                        </div>
+
+                                        <input type="hidden" name="role" value="masyarakat" />
+
+                                        <div class="text-center pt-1 mb-5 pb-1">
+                                            <button type="submit" class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" id="submitBtn">
+                                                <i class="fas fa-user-plus me-2"></i>Daftar
+                                            </button>
+                                            <a class="text-muted back-to-login" href="{{ route('login') }}">
+                                                <i class="fas fa-arrow-left me-1"></i>Kembali ke Login
+                                            </a>
+                                        </div>
+
+                                        <div class="d-flex align-items-center justify-content-center pb-4">
+                                            <p class="mb-0 me-2">Sudah punya akun?</p>
+                                            <a href="{{ route('login') }}" type="button" class="btn btn-outline-primary">
+                                                <i class="fas fa-sign-in-alt me-1"></i>Masuk
+                                            </a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -410,43 +254,91 @@
         </div>
     </section>
 
-    <!-- Font Awesome Icon -->
-    <script src="https://kit.fontawesome.com/a2e0e6cfd7.js" crossorigin="anonymous"></script>
-    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Form progress indicator
-        const form = document.getElementById('registerForm');
-        const progressBar = document.getElementById('progressBar');
-        const inputs = form.querySelectorAll('input[required]');
-        
-        function updateProgress() {
-            let filledInputs = 0;
-            inputs.forEach(input => {
-                if (input.value.trim() !== '') {
-                    filledInputs++;
-                    input.closest('.field').classList.add('is-valid');
+        document.addEventListener('DOMContentLoaded', function() {
+            const passwordInput = document.getElementById('password');
+            const passwordConfirmInput = document.getElementById('password_confirmation');
+            const submitBtn = document.getElementById('submitBtn');
+            const form = document.getElementById('registerForm');
+
+            // Password validation checks
+            const checks = {
+                length: document.getElementById('length-check'),
+                uppercase: document.getElementById('uppercase-check'),
+                lowercase: document.getElementById('lowercase-check'),
+                number: document.getElementById('number-check')
+            };
+
+            function validatePassword() {
+                const password = passwordInput.value;
+                const requirements = {
+                    length: password.length >= 8,
+                    uppercase: /[A-Z]/.test(password),
+                    lowercase: /[a-z]/.test(password),
+                    number: /\d/.test(password)
+                };
+
+                Object.keys(requirements).forEach(key => {
+                    if (requirements[key]) {
+                        checks[key].classList.add('valid');
+                        checks[key].classList.remove('invalid');
+                    } else {
+                        checks[key].classList.add('invalid');
+                        checks[key].classList.remove('valid');
+                    }
+                });
+
+                return Object.values(requirements).every(req => req);
+            }
+
+            function checkPasswordMatch() {
+                const password = passwordInput.value;
+                const confirmPassword = passwordConfirmInput.value;
+                const matchFeedback = document.getElementById('password-match-feedback');
+
+                if (confirmPassword && password !== confirmPassword) {
+                    passwordConfirmInput.classList.add('is-invalid');
+                    matchFeedback.style.display = 'block';
+                    return false;
+                } else if (confirmPassword && password === confirmPassword) {
+                    passwordConfirmInput.classList.remove('is-invalid');
+                    passwordConfirmInput.classList.add('is-valid');
+                    matchFeedback.style.display = 'none';
+                    return true;
                 } else {
-                    input.closest('.field').classList.remove('is-valid');
+                    passwordConfirmInput.classList.remove('is-invalid', 'is-valid');
+                    matchFeedback.style.display = 'none';
+                    return confirmPassword === '';
                 }
+            }
+
+            function updateSubmitButton() {
+                const isPasswordValid = validatePassword();
+                const isPasswordMatch = checkPasswordMatch();
+                const isFormValid = form.checkValidity() && isPasswordValid && isPasswordMatch;
+
+                submitBtn.disabled = !isFormValid;
+            }
+
+            passwordInput.addEventListener('input', function() {
+                validatePassword();
+                checkPasswordMatch();
+                updateSubmitButton();
             });
-            
-            const progress = (filledInputs / inputs.length) * 100;
-            progressBar.style.width = progress + '%';
-        }
-        
-        // Add event listeners to all inputs
-        inputs.forEach(input => {
-            input.addEventListener('input', updateProgress);
-            input.addEventListener('focus', function() {
-                this.closest('.field').classList.add('is-focused');
+
+            passwordConfirmInput.addEventListener('input', function() {
+                checkPasswordMatch();
+                updateSubmitButton();
             });
-            input.addEventListener('blur', function() {
-                this.closest('.field').classList.remove('is-focused');
-            });
+
+            // Check all form inputs
+            form.addEventListener('input', updateSubmitButton);
+            form.addEventListener('change', updateSubmitButton);
+
+            // Initial check
+            updateSubmitButton();
         });
-        
-        // Initial progress check
-        updateProgress();
     </script>
 </body>
 </html>

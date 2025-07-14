@@ -56,30 +56,28 @@ class UserController extends Controller
             'password' => 'required|string|min:6|confirmed',
         ]);
 
-        $user = User::create([
+        User::create([
             'nama' => $request->nama,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => 'masyarakat',
         ]);
 
-        Auth::login($user);
-
-        return redirect()->route('pengaduan')->with('success', 'Registrasi dan login berhasil.');
+        // Redirect ke login tanpa login otomatis
+        return redirect()->route('login')->with('success', 'Pendaftaran berhasil! Silakan login.');
     }
 
     // Menampilkan form ubah password
     public function showChangePasswordForm()
     {
-        return view('user.change_password'); // Pastikan file view ini ada
+        return view('user.change_password');
     }
 
     // Proses ubah password
     public function updatePassword(Request $request)
     {
-        $user = User::find(Auth::id()); // Dapatkan user secara pasti sebagai model Eloquent
+        $user = User::find(Auth::id());
 
-        // Validasi input
         $request->validate([
             'current_password' => ['required', function ($attribute, $value, $fail) use ($user) {
                 if (!Hash::check($value, $user->password)) {
@@ -95,7 +93,6 @@ class UserController extends Controller
             'new_password.different' => 'Kata sandi baru tidak boleh sama dengan kata sandi saat ini.',
         ]);
 
-        // Update password
         $user->password = Hash::make($request->new_password);
         $user->save();
 
