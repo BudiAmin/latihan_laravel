@@ -290,5 +290,88 @@
     </footer>
 
     <script src="{{ asset('js/welcome.js') }}"></script>
+
+    <div id="chatbot-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 1001; background-color: #206b99; border-radius: 50%; width: 60px; height: 60px; display: flex; justify-content: center; align-items: center; cursor: pointer; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); transition: all 0.3s ease;">
+        <i class="fas fa-robot" style="color: white; font-size: 28px;"></i>
+    </div>
+
+    <div id="chatbot-window" style="display: none; position: fixed; bottom: 90px; right: 20px; z-index: 1002; width: 300px; height: 400px; background-color: white; border-radius: 15px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25); overflow: hidden; display: flex; flex-direction: column;">
+        <div style="background-color: #206b99; color: white; padding: 15px; font-weight: bold; border-top-left-radius: 15px; border-top-right-radius: 15px; display: flex; justify-content: space-between; align-items: center;">
+            <span>SIPADU Chatbot</span>
+            <i id="chatbot-close" class="fas fa-times" style="cursor: pointer;"></i>
+        </div>
+        <div id="chatbot-messages" style="flex-grow: 1; padding: 15px; overflow-y: auto; background-color: #f0f2f5;">
+            <div style="background-color: #e0e4eb; padding: 10px; border-radius: 10px; margin-bottom: 10px; align-self: flex-start;">Halo! Ada yang bisa saya bantu?</div>
+        </div>
+        <div style="padding: 15px; border-top: 1px solid #e0e4eb; display: flex;">
+            <input type="text" id="chatbot-input" placeholder="Ketik pesan Anda..." style="flex-grow: 1; padding: 10px; border: 1px solid #ddd; border-radius: 8px; margin-right: 10px;">
+            <button id="chatbot-send" style="background-color: #206b99; color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer;">Kirim</button>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatbotContainer = document.getElementById('chatbot-container');
+            const chatbotWindow = document.getElementById('chatbot-window');
+            const chatbotClose = document.getElementById('chatbot-close');
+            const chatbotInput = document.getElementById('chatbot-input');
+            const chatbotSend = document.getElementById('chatbot-send');
+            const chatbotMessages = document.getElementById('chatbot-messages');
+
+            chatbotContainer.addEventListener('click', function() {
+                chatbotWindow.style.display = 'flex';
+                chatbotContainer.style.display = 'none';
+            });
+
+            chatbotClose.addEventListener('click', function() {
+                chatbotWindow.style.display = 'none';
+                chatbotContainer.style.display = 'flex';
+            });
+
+            chatbotSend.addEventListener('click', sendMessage);
+            chatbotInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+
+            function sendMessage() {
+                const messageText = chatbotInput.value.trim();
+                if (messageText !== '') {
+                    // Display user message
+                    const userMessageDiv = document.createElement('div');
+                    userMessageDiv.style.cssText = 'background-color: #d1fae5; padding: 10px; border-radius: 10px; margin-bottom: 10px; align-self: flex-end; text-align: right;';
+                    userMessageDiv.textContent = messageText;
+                    chatbotMessages.appendChild(userMessageDiv);
+                    chatbotInput.value = '';
+                    chatbotMessages.scrollTop = chatbotMessages.scrollHeight; // Gulir ke bawah
+
+                    // Simulasikan respons chatbot
+                    setTimeout(() => {
+                        const botMessageDiv = document.createElement('div');
+                        botMessageDiv.style.cssText = 'background-color: #e0e4eb; padding: 10px; border-radius: 10px; margin-bottom: 10px; align-self: flex-start;';
+                        
+                        let botResponse = "Maaf, saya tidak mengerti. Bisakah Anda mengulanginya?";
+                        const lowerCaseMessage = messageText.toLowerCase();
+
+                        if (lowerCaseMessage.includes("halo") || lowerCaseMessage.includes("hi")) {
+                            botResponse = "Halo! Ada yang bisa saya bantu terkait pengaduan?";
+                        } else if (lowerCaseMessage.includes("pengaduan")) {
+                            botResponse = "Anda bisa membuat pengaduan baru dengan klik 'Masuk' dan kemudian 'Daftar Sekarang' jika belum punya akun.";
+                        } else if (lowerCaseMessage.includes("status")) {
+                            botResponse = "Untuk cek status pengaduan, Anda perlu masuk ke sistem terlebih dahulu.";
+                        } else if (lowerCaseMessage.includes("kontak")) {
+                            botResponse = "Anda bisa menghubungi kami di (022) 6631638 atau email pengaduan@cimahikota.go.id.";
+                        } else if (lowerCaseMessage.includes("terima kasih") || lowerCaseMessage.includes("mksh")) {
+                            botResponse = "Sama-sama! Senang bisa membantu.";
+                        }
+
+                        botMessageDiv.textContent = botResponse;
+                        chatbotMessages.appendChild(botMessageDiv);
+                        chatbotMessages.scrollTop = chatbotMessages.scrollHeight; // Gulir ke bawah
+                    }, 1000);
+                }
+            }
+        });
+    </script>
 </body>
 </html>
