@@ -161,7 +161,7 @@
                                 <div class="card-body p-md-5 mx-md-4">
                                     <div class="text-center">
                                         <img src="images/logo_citra.png" class="img-fluid"
-                                             alt="Lambang Kota Cimahi">
+                                            alt="Lambang Kota Cimahi">
                                         <h4 class="mt-1 mb-5 pb-1">Buat Akun Baru</h4>
                                     </div>
 
@@ -185,7 +185,7 @@
 
                                         <div class="form-outline mb-4">
                                             <input type="text" id="nama" name="nama" class="form-control @error('nama') is-invalid @enderror"
-                                                   placeholder="Nama Lengkap" value="{{ old('nama') }}" required />
+                                                placeholder="Nama Lengkap" value="{{ old('nama') }}" required />
                                             <label class="form-label" for="nama">Nama Lengkap</label>
                                             @error('nama')
                                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -194,7 +194,7 @@
 
                                         <div class="form-outline mb-4">
                                             <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror"
-                                                   placeholder="Alamat Email" value="{{ old('email') }}" required />
+                                                placeholder="Alamat Email" value="{{ old('email') }}" required />
                                             <label class="form-label" for="email">Email</label>
                                             @error('email')
                                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -203,7 +203,7 @@
 
                                         <div class="form-outline mb-4">
                                             <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror"
-                                                   placeholder="Kata Sandi" required />
+                                                placeholder="Kata Sandi" required />
                                             <label class="form-label" for="password">Kata Sandi</label>
                                             <div class="password-requirements">
                                                 <ul>
@@ -211,6 +211,7 @@
                                                     <li id="uppercase-check">Minimal 1 huruf besar</li>
                                                     <li id="lowercase-check">Minimal 1 huruf kecil</li>
                                                     <li id="number-check">Minimal 1 angka</li>
+                                                    <li id="special-char-check">Minimal 1 karakter khusus (misal: _@$!%*#?&)</li>
                                                 </ul>
                                             </div>
                                             @error('password')
@@ -220,7 +221,7 @@
 
                                         <div class="form-outline mb-4">
                                             <input type="password" id="password_confirmation" name="password_confirmation" class="form-control"
-                                                   placeholder="Konfirmasi Kata Sandi" required />
+                                                placeholder="Konfirmasi Kata Sandi" required />
                                             <label class="form-label" for="password_confirmation">Konfirmasi Kata Sandi</label>
                                             <div id="password-match-feedback" class="invalid-feedback" style="display: none;">
                                                 Kata sandi tidak cocok
@@ -240,7 +241,7 @@
 
                                         <div class="d-flex align-items-center justify-content-center pb-4">
                                             <p class="mb-0 me-2">Sudah punya akun?</p>
-                                            <a href="{{ route('login') }}" type="button" class="btn btn-outline-primary">
+                                            <a href="{{ route('login') }}" type="button" class="btn btn-outline-danger"> {{-- Changed btn-outline-primary to btn-outline-danger --}}
                                                 <i class="fas fa-sign-in-alt me-1"></i>Masuk
                                             </a>
                                         </div>
@@ -267,7 +268,8 @@
                 length: document.getElementById('length-check'),
                 uppercase: document.getElementById('uppercase-check'),
                 lowercase: document.getElementById('lowercase-check'),
-                number: document.getElementById('number-check')
+                number: document.getElementById('number-check'),
+                specialChar: document.getElementById('special-char-check') // New element for special character check
             };
 
             function validatePassword() {
@@ -276,7 +278,8 @@
                     length: password.length >= 8,
                     uppercase: /[A-Z]/.test(password),
                     lowercase: /[a-z]/.test(password),
-                    number: /\d/.test(password)
+                    number: /\d/.test(password),
+                    specialChar: /[@$!%*#?&]/.test(password) // Check for special characters
                 };
 
                 Object.keys(requirements).forEach(key => {
@@ -297,33 +300,48 @@
                 const confirmPassword = passwordConfirmInput.value;
                 const matchFeedback = document.getElementById('password-match-feedback');
 
-                if (confirmPassword && password !== confirmPassword) {
-                    passwordConfirmInput.classList.add('is-invalid');
-                    matchFeedback.style.display = 'block';
-                    return false;
-                } else if (confirmPassword && password === confirmPassword) {
-                    passwordConfirmInput.classList.remove('is-invalid');
-                    passwordConfirmInput.classList.add('is-valid');
-                    matchFeedback.style.display = 'none';
-                    return true;
+                // Only show feedback if confirmPassword has content or if password is not empty
+                if (confirmPassword || password) {
+                    if (password !== confirmPassword) {
+                        passwordConfirmInput.classList.add('is-invalid');
+                        matchFeedback.style.display = 'block';
+                        return false;
+                    } else {
+                        passwordConfirmInput.classList.remove('is-invalid');
+                        // Add is-valid only if both fields have content and match
+                        if (password && confirmPassword) {
+                            passwordConfirmInput.classList.add('is-valid');
+                        } else {
+                            passwordConfirmInput.classList.remove('is-valid');
+                        }
+                        matchFeedback.style.display = 'none';
+                        return true;
+                    }
                 } else {
+                    // If both are empty, remove validation states
                     passwordConfirmInput.classList.remove('is-invalid', 'is-valid');
                     matchFeedback.style.display = 'none';
-                    return confirmPassword === '';
+                    return true; // Consider empty as valid for initial state
                 }
             }
 
+
             function updateSubmitButton() {
+                // Ensure native form validation passes for all required fields first
+                // This checks 'nama', 'email', 'password', 'password_confirmation' for 'required' attribute
+                const isFormNativeValid = form.checkValidity();
+
                 const isPasswordValid = validatePassword();
                 const isPasswordMatch = checkPasswordMatch();
-                const isFormValid = form.checkValidity() && isPasswordValid && isPasswordMatch;
 
-                submitBtn.disabled = !isFormValid;
+                // The submit button is enabled only if all native form validations pass,
+                // AND password meets all requirements, AND passwords match.
+                submitBtn.disabled = !(isFormNativeValid && isPasswordValid && isPasswordMatch);
             }
 
             passwordInput.addEventListener('input', function() {
                 validatePassword();
-                checkPasswordMatch();
+                checkPasswordMatch(); // Re-check match when password changes
                 updateSubmitButton();
             });
 
@@ -332,11 +350,13 @@
                 updateSubmitButton();
             });
 
-            // Check all form inputs
-            form.addEventListener('input', updateSubmitButton);
-            form.addEventListener('change', updateSubmitButton);
+            // Add event listeners to other input fields to ensure submit button updates
+            // when other required fields are filled/emptied.
+            document.getElementById('nama').addEventListener('input', updateSubmitButton);
+            document.getElementById('email').addEventListener('input', updateSubmitButton);
 
-            // Initial check
+
+            // Initial check on page load
             updateSubmitButton();
         });
     </script>

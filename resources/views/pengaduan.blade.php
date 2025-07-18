@@ -586,16 +586,31 @@
 
         .file.is-primary-laut .file-name {
             border: 1px solid var(--border-color); /* Consistent border color */
-            color: var(--text-color); /* Consistent text color */
             background-color: #fdfdfe; /* Consistent light background */
             padding: 0.8rem 1rem;
             border-radius: 0 8px 8px 0; /* Match form inputs */
-            max-width: calc(100% - 140px);
+            /* Mengoptimalkan tampilan nama file:
+               - white-space: nowrap;  -> Menjaga teks dalam satu baris.
+               - overflow: hidden;     -> Menyembunyikan teks yang melebihi batas.
+               - text-overflow: ellipsis; -> Menambahkan '...' jika teks terpotong.
+               - flex-grow: 1;         -> Memungkinkan elemen mengambil ruang kosong sebanyak mungkin.
+               - min-width: 0;         -> Penting dalam flexbox agar elemen bisa menyusut lebih dari ukuran kontennya.
+            */
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
             display: flex;
             align-items: center;
+            flex-grow: 1;
+            min-width: 0;
+            /* Hapus atau komentar baris max-width ini jika ada sebelumnya,
+               karena flex-grow dan min-width akan lebih efektif dalam konteks flexbox. */
+            /* max-width: calc(100% - 140px); */
+        }
+
+        /* --- Perubahan warna teks "Belum ada berkas dipilih" menjadi hitam --- */
+        #fileName {
+            color: #000000 !important; /* Menetapkan warna hitam, menggunakan !important untuk memastikan override */
         }
     </style>
 </head>
@@ -689,9 +704,9 @@
                                             Pilih Foto
                                         </span>
                                     </span>
-                                    {{-- <span class="file-name" id="fileName">
+                                    <span class="file-name" id="fileName">
                                         Belum ada berkas dipilih
-                                    </span> --}}
+                                    </span>
                                 </label>
                             </div>
                             <p class="help">Format yang didukung: JPG, PNG. Ukuran maksimal: 2MB.</p>
@@ -738,7 +753,7 @@
                         </div>
                         
                         <div class="complaint-meta">
-                            <span><i class="fas fa-calendar-alt has-text-grey-light"></i> Diajukan: {{ $item->tanggal_pengaduan ? $item->tanggal_pengaduan->translatedFormat('d F Y, H:i') : 'Tanggal tidak tersedia' }} WIB</span>
+                            <span><i class="fas fa-calendar-alt has-text-grey-light"></i> Diajukan: {{ $item->tanggal_pengaduan ? $item->tanggal_pengaduan->translatedFormat('d F Y, H:i:s') : 'Tanggal tidak tersedia' }} WIB</span>
                         </div>
                         
                         @if($item->foto)
@@ -752,7 +767,7 @@
                                 @foreach($item->tanggapan as $tanggapan)
                                     <div class="tanggapan-card">
                                         <p class="is-size-7 has-text-grey-dark mb-1">
-                                            Dari: <strong>{{ $tanggapan->admin->nama ?? 'Petugas Tidak Diketahui' }}</strong> pada {{ $tanggapan->tanggal_tanggapan->translatedFormat('d M Y, H:i') }} WIB
+                                            Dari: <strong>{{ $tanggapan->admin->nama ?? 'Petugas Tidak Diketahui' }}</strong> pada {{ $tanggapan->tanggal_tanggapan->translatedFormat('d F Y, H:i:s') }} WIB
                                         </p>
                                         <p class="content is-small">{{ $tanggapan->isi_tanggapan }}</p>
                                     </div>

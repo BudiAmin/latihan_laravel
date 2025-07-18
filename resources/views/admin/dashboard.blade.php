@@ -842,12 +842,19 @@
 
             ---
 
-            <div id="pengaduan-section" class="content-card">
+           <div id="pengaduan-section" class="content-card">
                 <div class="card-header">
                     <h2 class="card-title">Daftar Pengaduan Masuk</h2>
                     <p class="card-subtitle">Manajemen dan pemantauan seluruh pengaduan yang telah diajukan oleh masyarakat.</p>
                 </div>
                 <div class="card-content">
+                    {{-- Tombol untuk ekspor PDF --}}
+                    <div class="action-buttons mb-4">
+                        <a href="{{ route('admin.pengaduan.export.pdf') }}" class="button is-info">
+                            <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                            <span>Cetak PDF</span>
+                        </a>
+                    </div>
                     <div class="table-container">
                         <table class="table is-fullwidth is-striped is-hoverable">
                             <thead>
@@ -913,9 +920,6 @@
                     </div>
                 </div>
             </div>
-
-            ---
-
             <div id="users-section" class="content-card">
                 <div class="card-header">
                     <h2 class="card-title">Manajemen Akun Pengguna</h2>

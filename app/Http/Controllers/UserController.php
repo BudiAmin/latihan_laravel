@@ -53,7 +53,18 @@ class UserController extends Controller
         $request->validate([
             'nama' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => [
+                'required',
+                'string',
+                'min:8',
+                'confirmed',
+                'regex:/[a-z]/',
+                'regex:/[A-Z]/',
+                'regex:/[0-9]/',
+                'regex:/[@$!%*#?&]/', 
+            ],
+        ], [
+            'password.regex' => 'Kata sandi harus mengandung setidaknya satu huruf kecil, satu huruf besar, satu angka, dan satu karakter khusus.'
         ]);
 
         User::create([
@@ -84,13 +95,24 @@ class UserController extends Controller
                     $fail('Kata sandi saat ini salah.');
                 }
             }],
-            'new_password' => ['required', 'string', 'min:8', 'confirmed', 'different:current_password'],
+            'new_password' => [
+                'required',
+                'string',
+                'min:8',
+                'confirmed',
+                'different:current_password',
+                'regex:/[a-z]/',
+                'regex:/[A-Z]/',
+                'regex:/[0-9]/',
+                'regex:/[@$!%*#?&]/',
+            ],
         ], [
             'current_password.required' => 'Kata sandi saat ini wajib diisi.',
             'new_password.required' => 'Kata sandi baru wajib diisi.',
             'new_password.min' => 'Kata sandi baru minimal 8 karakter.',
             'new_password.confirmed' => 'Konfirmasi kata sandi baru tidak cocok.',
             'new_password.different' => 'Kata sandi baru tidak boleh sama dengan kata sandi saat ini.',
+            'new_password.regex' => 'Kata sandi baru harus mengandung setidaknya satu huruf kecil, satu huruf besar, satu angka, dan satu karakter khusus.'
         ]);
 
         $user->password = Hash::make($request->new_password);

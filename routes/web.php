@@ -7,7 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 
-// Halaman utama - Statistik pengaduan
+// Halaman utama
 Route::get('/', [PengaduanController::class, 'statistik'])->name('home');
 
 // Login & Logout
@@ -44,7 +44,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     // New User Management Routes
     Route::prefix('admin/users')->name('admin.users.')->group(function () {
-        Route::get('/', [AdminController::class, 'usersIndex'])->name('index'); // This route is not explicitly used in dashboard.blade.php for listing but good for full CRUD
+        Route::get('/', [AdminController::class, 'usersIndex'])->name('index');
         Route::get('/create', [AdminController::class, 'usersCreate'])->name('create');
         Route::post('/', [AdminController::class, 'usersStore'])->name('store');
         Route::get('/{id}/edit', [AdminController::class, 'usersEdit'])->name('edit');
@@ -54,7 +54,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     // New Tanggapan Management Routes
     Route::prefix('admin/tanggapans')->name('admin.tanggapans.')->group(function () {
-        Route::get('/', [AdminController::class, 'tanggapansIndex'])->name('index'); // Same as above
+        Route::get('/', [AdminController::class, 'tanggapansIndex'])->name('index');
         Route::get('/create', [AdminController::class, 'tanggapansCreate'])->name('create');
         Route::post('/', [AdminController::class, 'tanggapansStore'])->name('store');
         Route::get('/{id}/edit', [AdminController::class, 'tanggapansEdit'])->name('edit');
@@ -65,7 +65,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     // New Password Reset Token Management Routes
     // Note: 'email' is typically the primary key for password_reset_tokens table.
     Route::prefix('admin/password_resets')->name('admin.password_resets.')->group(function () {
-        Route::get('/', [AdminController::class, 'passwordResetsIndex'])->name('index'); // Same as above
+        Route::get('/', [AdminController::class, 'passwordResetsIndex'])->name('index');
         Route::delete('/{email}', [AdminController::class, 'passwordResetsDestroy'])->name('destroy');
     });
 });
@@ -74,4 +74,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile/change-password', [UserController::class, 'showChangePasswordForm'])->name('user.change-password.form');
     Route::post('/profile/change-password', [UserController::class, 'updatePassword'])->name('user.change-password.update');
+
+     // New Export Route for Pengaduan (PDF only)
+    Route::get('/admin/pengaduan/export/pdf', [AdminController::class, 'exportPdfPengaduan'])->name('admin.pengaduan.export.pdf');
 });
