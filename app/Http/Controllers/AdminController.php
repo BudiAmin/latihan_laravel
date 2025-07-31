@@ -8,7 +8,8 @@ use App\Models\Tanggapan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon; // Pastikan ini ada
+use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class AdminController extends Controller
 {
@@ -210,5 +211,12 @@ class AdminController extends Controller
         DB::table('password_reset_tokens')->where('email', $email)->delete();
 
         return redirect()->route('admin.dashboard')->with('success', 'Token reset password berhasil dihapus.');
+    }
+
+     public function exportPdfPengaduan()
+    {
+        $pengaduans = Pengaduan::with('user')->latest()->get();
+        $pdf = Pdf::loadView('admin.pengaduan_pdf', compact('pengaduans'));
+        return $pdf->download('laporan-pengaduan-' . Carbon::now()->format('Ymd_His') . '.pdf');
     }
 }

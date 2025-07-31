@@ -337,15 +337,12 @@
             function sendMessage() {
                 const messageText = chatbotInput.value.trim();
                 if (messageText !== '') {
-                    // Display user message
                     const userMessageDiv = document.createElement('div');
                     userMessageDiv.style.cssText = 'background-color: #d1fae5; padding: 10px; border-radius: 10px; margin-bottom: 10px; align-self: flex-end; text-align: right;';
                     userMessageDiv.textContent = messageText;
                     chatbotMessages.appendChild(userMessageDiv);
                     chatbotInput.value = '';
                     chatbotMessages.scrollTop = chatbotMessages.scrollHeight; // Gulir ke bawah
-
-                    // Simulasikan respons chatbot
                     setTimeout(() => {
                         const botMessageDiv = document.createElement('div');
                         botMessageDiv.style.cssText = 'background-color: #e0e4eb; padding: 10px; border-radius: 10px; margin-bottom: 10px; align-self: flex-start;';
