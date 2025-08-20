@@ -16,7 +16,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-    .gradient-custom-2 {
+        .gradient-custom-2 {
             /* fallback for old browsers */
             background: #4169E1; /* Royal Blue as a fallback */
 
@@ -69,6 +69,19 @@
             font-weight: 600;
             border-radius: 0.5rem;
         }
+        
+        /* Tambahan styling untuk password toggle */
+        .password-container {
+            position: relative;
+        }
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #6c757d;
+        }
 
         .notification {
             border-radius: 0.5rem;
@@ -110,7 +123,7 @@
                             <div class="col-lg-6">
                                 <div class="card-body p-md-5 mx-md-4">
                                     <div class="text-center">
-                                        <img src="images/logo_citra.png" class="img-fluid"
+                                        <img src="{{ asset('images/logo_citra.png') }}" class="img-fluid"
                                              alt="Lambang Kota Cimahi">
                                         <h4 class="mt-1 mb-5 pb-1">Sistem Pengaduan Masyarakat Kecamatan Cimahi Utara</h4>
                                     </div>
@@ -132,10 +145,11 @@
                                             <label class="form-label" for="email">Email</label>
                                         </div>
 
-                                        <div class="form-outline mb-4">
+                                        <div class="form-outline mb-4 password-container">
                                             <input type="password" id="password" name="password" class="form-control"
                                                    placeholder="Kata Sandi" required />
                                             <label class="form-label" for="password">Kata Sandi</label>
+                                            <span toggle="#password" class="fa fa-fw fa-eye field-icon password-toggle"></span>
                                         </div>
 
                                         <div class="text-center pt-1 mb-5 pb-1">
@@ -145,7 +159,9 @@
 
                                         <div class="d-flex align-items-center justify-content-center pb-4">
                                             <p class="mb-0 me-2">Belum punya akun?</p>
-                                            <a href="{{ route('register') }}" type="button" class="btn btn-outline-danger">Buat Akun Baru</a>
+                                            <a href="{{ route('register') }}" type="button" class="btn btn-outline-danger">
+                                                <i class="fas fa-sign-in-alt me-1"></i>Mendaftar
+                                            </a>
                                         </div>
                                     </form>
                                 </div>
@@ -164,5 +180,23 @@
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Password toggle functionality
+        document.querySelectorAll('.password-toggle').forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                const target = document.querySelector(this.getAttribute('toggle'));
+                const icon = this;
+                if (target.getAttribute('type') === 'password') {
+                    target.setAttribute('type', 'text');
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                } else {
+                    target.setAttribute('type', 'password');
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
+            });
+        });
+    </script>
 </body>
 </html>

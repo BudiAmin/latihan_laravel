@@ -15,11 +15,11 @@ class Pengaduan extends Model
     protected $fillable = [
         'id_user',
         'judul',
-        'isi', // Disesuaikan menjadi 'isi'
+        'isi',
         'lokasi',
         'foto',
         'status',
-        'tanggal_pengaduan' // Disesuaikan menjadi 'tanggal_pengaduan'
+        'tanggal_pengaduan'
     ];
 
     /**

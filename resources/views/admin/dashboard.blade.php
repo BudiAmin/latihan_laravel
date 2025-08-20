@@ -6,7 +6,7 @@
     <title>Dashboard Admin - SIPADU Pemerintahan</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <script src="https://kit.fontawesome.com/a2e0e6cfd7.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Serif:wght@500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Serif:wght@500;600;700&display=swap" rel="stylesheet">
     <style>
         /* Variables for a sophisticated, governmental feel */
         :root {
@@ -381,18 +381,29 @@
         }
 
         /* Table Styling */
-        .table-container {
+        /* Updated table-container to use the provided structure */
+        .relative.overflow-x-auto.shadow-md.sm\:rounded-lg {
             overflow-x: auto;
             border-radius: 10px; /* Slightly more rounded for tables */
             border: 1px solid var(--border-color);
             box-shadow: inset 0 1px 3px rgba(0,0,0,0.03); /* Inner shadow for tables */
         }
 
-        .table {
+        .table { /* Existing Bulma table class */
             margin: 0;
             background: white;
             border-collapse: separate; /* Allows border-radius on table-container */
             border-spacing: 0;
+            width: 100%; /* Ensure it fills parent */
+            text-align: left; /* rtl:text-right is not directly used by Bulma */
+        }
+
+        .table.is-striped tbody tr:nth-child(even) {
+            background-color: #f8f8f8; /* Bulma striped color */
+        }
+
+        .table.is-hoverable tbody tr:not(.is-selected):hover {
+            background-color: #f5f5f5; /* Bulma hover color */
         }
 
         .table thead th {
@@ -415,11 +426,6 @@
             vertical-align: middle;
             font-size: 0.92rem; /* Slightly larger body text */
             color: var(--text-color);
-        }
-
-        .table tbody tr:hover {
-            background-color: #f8fbfd; /* Lighter hover background */
-            box-shadow: 0 1px 4px rgba(0,0,0,0.03); /* Subtle shadow on row hover */
         }
 
         .table tbody tr:last-child td {
@@ -696,6 +702,123 @@
             }
         }
 
+        /* Custom Modal for Delete Confirmation */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 10002; /* Higher than other elements */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6); /* Darker overlay */
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            position: relative;
+            animation: fadeInScale 0.3s ease-out forwards;
+        }
+
+        .modal-icon {
+            font-size: 3.5rem;
+            color: var(--danger-color);
+            margin-bottom: 20px;
+            animation: bounceIn 0.6s ease-out;
+        }
+
+        .modal-content h3 {
+            font-size: 1.6rem;
+            color: var(--heading-color);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .modal-content p {
+            font-size: 1rem;
+            color: var(--text-color);
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .modal-button {
+            padding: 0.8rem 1.8rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease-out;
+            border: none;
+        }
+
+        .modal-button.is-confirm {
+            background-color: var(--danger-color);
+            color: white;
+            box-shadow: 0 4px 10px rgba(197, 48, 48, 0.2);
+        }
+        .modal-button.is-confirm:hover {
+            background-color: #a52626;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(197, 48, 48, 0.3);
+        }
+
+        .modal-button.is-cancel {
+            background-color: #e2e8f0;
+            color: #4a5568;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .modal-button.is-cancel:hover {
+            background-color: #cbd5e1;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes bounceIn {
+            0%, 20%, 40%, 60%, 80%, 100% {
+                animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+            }
+            0% {
+                opacity: 0;
+                transform: scale3d(0.3, 0.3, 0.3);
+            }
+            20% {
+                transform: scale3d(1.1, 1.1, 1.1);
+            }
+            40% {
+                transform: scale3d(0.9, 0.9, 0.9);
+            }
+            60% {
+                opacity: 1;
+                transform: scale3d(1.03, 1.03, 1.03);
+            }
+            80% {
+                transform: scale3d(0.97, 0.97, 0.97);
+            }
+            100% {
+                opacity: 1;
+                transform: scale3d(1, 1, 1);
+            }
+        }
     </style>
 </head>
 <body>
@@ -840,22 +963,19 @@
                 </div>
             </div>
 
-            ---
-
            <div id="pengaduan-section" class="content-card">
                 <div class="card-header">
                     <h2 class="card-title">Daftar Pengaduan Masuk</h2>
                     <p class="card-subtitle">Manajemen dan pemantauan seluruh pengaduan yang telah diajukan oleh masyarakat.</p>
                 </div>
                 <div class="card-content">
-                    {{-- Tombol untuk ekspor PDF --}}
                     <div class="action-buttons mb-4">
                         <a href="{{ route('admin.pengaduan.export.pdf') }}" class="button is-info">
                             <span class="icon"><i class="fas fa-file-pdf"></i></span>
                             <span>Cetak PDF</span>
                         </a>
                     </div>
-                    <div class="table-container">
+                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                         <table class="table is-fullwidth is-striped is-hoverable">
                             <thead>
                                 <tr>
@@ -875,7 +995,12 @@
                                     <td>{{ $index + 1 }}</td>
                                     <td><strong>{{ $p->user->nama }}</strong></td>
                                     <td>{{ $p->judul }}</td>
-                                    <td>{{ Str::limit($p->isi, 50) }}</td>
+                                    <td>
+                                        {{ Str::limit($p->isi, 50) }}
+                                        @if(strlen($p->isi) > 50)
+                                            <span title="{{ $p->isi }}">...</span>
+                                        @endif
+                                    </td>
                                     <td>
                                         @if($p->foto)
                                             <img src="{{ asset('storage/' . $p->foto) }}" width="70" height="70" alt="Foto Pengaduan">
@@ -897,7 +1022,7 @@
                                         </form>
                                     </td>
                                     <td>
-                                        <form method="POST" action="{{ route('admin.pengaduan.destroy', $p->id_pengaduan) }}" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data pengaduan ini secara permanen?')" style="display: inline;">
+                                        <form id="delete-pengaduan-{{ $p->id_pengaduan }}" method="POST" action="{{ route('admin.pengaduan.destroy', $p->id_pengaduan) }}" onsubmit="event.preventDefault(); showDeleteConfirmation('delete-pengaduan-{{ $p->id_pengaduan }}', 'pengaduan');">
                                             @csrf
                                             @method('DELETE')
                                             <button class="button is-danger is-small" type="submit">
@@ -931,7 +1056,7 @@
                             <span class="icon"><i class="fas fa-user-plus"></i></span> <span>Tambah Pengguna Baru</span>
                         </a>
                     </div>
-                    <div class="table-container">
+                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                         <table class="table is-fullwidth is-striped is-hoverable">
                             <thead>
                                 <tr>
@@ -957,10 +1082,9 @@
                                                 </span>
                                                 <span>Edit</span>
                                             </a>
-                                            <form method="POST"
+                                            <form id="delete-user-{{ $user->id_user }}" method="POST"
                                                 action="{{ route('admin.users.destroy', $user->id_user) }}"
-                                                onsubmit="return confirm('Apakah Anda yakin ingin menghapus akun pengguna ini secara permanen?')"
-                                                style="display: inline;">
+                                                onsubmit="event.preventDefault(); showDeleteConfirmation('delete-user-{{ $user->id_user }}', 'akun pengguna');">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="button is-danger is-small" type="submit">
@@ -987,7 +1111,6 @@
                 </div>
             </div>
 
-            ---
 
             <div id="tanggapan-section" class="content-card">
                 <div class="card-header">
@@ -1000,7 +1123,7 @@
                             <span class="icon"><i class="fas fa-plus-square"></i></span> <span>Buat Tanggapan Baru</span>
                         </a>
                     </div>
-                    <div class="table-container">
+                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                         <table class="table is-fullwidth is-striped is-hoverable">
                             <thead>
                                 <tr>
@@ -1018,14 +1141,19 @@
                                     <td>{{ $index + 1 }}</td>
                                     <td><span class="tag is-info">#{{ $tanggapan->id_pengaduan }}</span></td>
                                     <td><strong>{{ $tanggapan->admin->nama ?? 'N/A' }}</strong></td>
-                                    <td>{{ Str::limit($tanggapan->isi_tanggapan, 50) }}</td>
+                                    <td>
+                                        {{ Str::limit($tanggapan->isi_tanggapan, 50) }}
+                                        @if(strlen($tanggapan->isi_tanggapan) > 50)
+                                            <span title="{{ $tanggapan->isi_tanggapan }}">...</span>
+                                        @endif
+                                    </td>
                                     <td>{{ $tanggapan->tanggal_tanggapan->translatedFormat('d M Y, H:i') }}</td>
                                     <td>
                                         <div class="buttons">
                                             <a href="{{ route('admin.tanggapans.edit', $tanggapan->id_tanggapan) }}" class="button is-warning is-small">
                                                 <span class="icon"><i class="fas fa-pencil-alt"></i></span> <span>Edit</span>
                                             </a>
-                                            <form method="POST" action="{{ route('admin.tanggapans.destroy', $tanggapan->id_tanggapan) }}" onsubmit="return confirm('Apakah Anda yakin ingin menghapus tanggapan ini secara permanen?')" style="display: inline;">
+                                            <form id="delete-tanggapan-{{ $tanggapan->id_tanggapan }}" method="POST" action="{{ route('admin.tanggapans.destroy', $tanggapan->id_tanggapan) }}" onsubmit="event.preventDefault(); showDeleteConfirmation('delete-tanggapan-{{ $tanggapan->id_tanggapan }}', 'tanggapan');">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="button is-danger is-small" type="submit">
@@ -1048,16 +1176,13 @@
                     </div>
                 </div>
             </div>
-
-            ---
-
             <div id="password-reset-section" class="content-card">
                 <div class="card-header">
                     <h2 class="card-title">Daftar Token Reset Kata Sandi</h2>
                     <p class="card-subtitle">Pantau dan kelola token yang digunakan untuk mengatur ulang kata sandi pengguna.</p>
                 </div>
                 <div class="card-content">
-                    <div class="table-container">
+                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                         <table class="table is-fullwidth is-striped is-hoverable">
                             <thead>
                                 <tr>
@@ -1076,7 +1201,7 @@
                                     <td><code style="background: #eef2f6; padding: 0.3rem 0.6rem; border-radius: 5px; color: #3b4a5d; font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;">{{ Str::limit($pr->token, 20) }}</code></td>
                                     <td>{{ $pr->created_at->translatedFormat('d M Y, H:i') }}</td>
                                     <td>
-                                        <form method="POST" action="{{ route('admin.password_resets.destroy', $pr->email) }}" onsubmit="return confirm('Apakah Anda yakin ingin menghapus token reset kata sandi ini secara permanen?')">
+                                        <form id="delete-token-{{ Str::slug($pr->email) }}" method="POST" action="{{ route('admin.password_resets.destroy', $pr->email) }}" onsubmit="event.preventDefault(); showDeleteConfirmation('delete-token-{{ Str::slug($pr->email) }}', 'token reset kata sandi');">
                                             @csrf
                                             @method('DELETE')
                                             <button class="button is-danger is-small" type="submit">
@@ -1099,6 +1224,18 @@
                 </div>
             </div>
         </main>
+    </div>
+
+    <div id="deleteConfirmationModal" class="modal">
+        <div class="modal-content">
+            <span class="icon modal-icon"><i class="fas fa-exclamation-triangle"></i></span>
+            <h3 id="modalTitle">Konfirmasi Penghapusan</h3>
+            <p id="modalMessage">Apakah Anda yakin ingin menghapus data ini secara permanen?</p>
+            <div class="modal-buttons">
+                <button class="modal-button is-confirm" id="confirmDeleteButton">Ya, Hapus</button>
+                <button class="modal-button is-cancel" id="cancelDeleteButton">Batal</button>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -1313,6 +1450,53 @@
         `;
         document.head.appendChild(styleSheet);
 
+
+        // Custom Delete Confirmation Modal Logic
+        let formToSubmit = null;
+
+        function showDeleteConfirmation(formId, itemName) {
+            const modal = document.getElementById('deleteConfirmationModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalMessage = document.getElementById('modalMessage');
+            
+            modalTitle.textContent = `Hapus ${itemName}?`;
+            modalMessage.textContent = `Apakah Anda yakin ingin menghapus ${itemName} ini secara permanen? Tindakan ini tidak dapat dibatalkan.`;
+            
+            formToSubmit = document.getElementById(formId);
+            modal.style.display = 'flex'; // Use flex to center
+        }
+
+        document.getElementById('confirmDeleteButton').addEventListener('click', function() {
+            if (formToSubmit) {
+                formToSubmit.submit();
+            }
+            closeDeleteConfirmationModal();
+        });
+
+        document.getElementById('cancelDeleteButton').addEventListener('click', function() {
+            closeDeleteConfirmationModal();
+        });
+
+        function closeDeleteConfirmationModal() {
+            const modal = document.getElementById('deleteConfirmationModal');
+            modal.style.display = 'none';
+            formToSubmit = null; // Clear the form reference
+        }
+
+        // Close modal if clicked outside content
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('deleteConfirmationModal');
+            if (event.target == modal) {
+                closeDeleteConfirmationModal();
+            }
+        });
+
+        // Close modal on escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && document.getElementById('deleteConfirmationModal').style.display === 'flex') {
+                closeDeleteConfirmationModal();
+            }
+        });
 
     </script>
 </body>
