@@ -58,6 +58,19 @@
             padding: 0.75rem 1rem;
             font-size: 1rem;
         }
+        
+        /* Tambahan styling untuk password toggle */
+        .password-container {
+            position: relative;
+        }
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #6c757d;
+        }
 
         .form-outline .form-label {
             font-weight: 600;
@@ -160,7 +173,7 @@
                             <div class="col-lg-6">
                                 <div class="card-body p-md-5 mx-md-4">
                                     <div class="text-center">
-                                        <img src="images/logo_citra.png" class="img-fluid"
+                                        <img src="{{ asset('images/logo_citra.png') }}" class="img-fluid"
                                             alt="Lambang Kota Cimahi">
                                         <h4 class="mt-1 mb-5 pb-1">Buat Akun Baru</h4>
                                     </div>
@@ -201,10 +214,11 @@
                                             @enderror
                                         </div>
 
-                                        <div class="form-outline mb-4">
+                                        <div class="form-outline mb-4 password-container">
                                             <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror"
                                                 placeholder="Kata Sandi" required />
                                             <label class="form-label" for="password">Kata Sandi</label>
+                                            <span toggle="#password" class="fa fa-fw fa-eye field-icon password-toggle"></span>
                                             <div class="password-requirements">
                                                 <ul>
                                                     <li id="length-check">Minimal 8 karakter</li>
@@ -219,10 +233,11 @@
                                             @enderror
                                         </div>
 
-                                        <div class="form-outline mb-4">
+                                        <div class="form-outline mb-4 password-container">
                                             <input type="password" id="password_confirmation" name="password_confirmation" class="form-control"
                                                 placeholder="Konfirmasi Kata Sandi" required />
                                             <label class="form-label" for="password_confirmation">Konfirmasi Kata Sandi</label>
+                                            <span toggle="#password_confirmation" class="fa fa-fw fa-eye field-icon password-toggle"></span>
                                             <div id="password-match-feedback" class="invalid-feedback" style="display: none;">
                                                 Kata sandi tidak cocok
                                             </div>
@@ -263,13 +278,30 @@
             const submitBtn = document.getElementById('submitBtn');
             const form = document.getElementById('registerForm');
 
+            // Password toggle functionality
+            document.querySelectorAll('.password-toggle').forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const target = document.querySelector(this.getAttribute('toggle'));
+                    const icon = this;
+                    if (target.getAttribute('type') === 'password') {
+                        target.setAttribute('type', 'text');
+                        icon.classList.remove('fa-eye');
+                        icon.classList.add('fa-eye-slash');
+                    } else {
+                        target.setAttribute('type', 'password');
+                        icon.classList.remove('fa-eye-slash');
+                        icon.classList.add('fa-eye');
+                    }
+                });
+            });
+
             // Password validation checks
             const checks = {
                 length: document.getElementById('length-check'),
                 uppercase: document.getElementById('uppercase-check'),
                 lowercase: document.getElementById('lowercase-check'),
                 number: document.getElementById('number-check'),
-                specialChar: document.getElementById('special-char-check') // New element for special character check
+                specialChar: document.getElementById('special-char-check')
             };
 
             function validatePassword() {
@@ -279,7 +311,7 @@
                     uppercase: /[A-Z]/.test(password),
                     lowercase: /[a-z]/.test(password),
                     number: /\d/.test(password),
-                    specialChar: /[@$!%*#?&]/.test(password) // Check for special characters
+                    specialChar: /[_@$!%*#?&]/.test(password)
                 };
 
                 Object.keys(requirements).forEach(key => {

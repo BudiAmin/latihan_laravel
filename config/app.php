@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Http\Request;
 
 return [
 
@@ -11,7 +12,7 @@ return [
 
     'debug' => (bool) env('APP_DEBUG', false),
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', Request::capture()->getSchemeAndHttpHost()),
 
     'asset_url' => env('ASSET_URL'),
 

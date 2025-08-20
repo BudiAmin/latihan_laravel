@@ -1,3 +1,4 @@
+/* public/css/welcome.css */
 /* Reset dan Base Styles */
 * {
     margin: 0;
@@ -418,14 +419,17 @@ body {
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(200px, 1fr)
+    ); /* Adjusted minmax for smaller cards */
     gap: 2rem;
 }
 
 .service-card {
     background: white;
     border-radius: 20px;
-    padding: 3rem 2rem;
+    padding: 2rem 1.5rem; /* Adjusted padding */
     text-align: center;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
@@ -859,6 +863,10 @@ body {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
+
+    .services-grid {
+        grid-template-columns: repeat(3, 1fr); /* Adjust for smaller screens */
+    }
 }
 
 @media (max-width: 768px) {
@@ -889,7 +897,7 @@ body {
     }
 
     .services-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Single column on very small screens */
     }
 
     .steps {

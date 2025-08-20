@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dasbor Pelayanan Pengaduan - Pemerintah Daerah</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <script src="https://kit.fontawesome.com/a2e0e6cfd7.js" crossorigin="anonymous"></script>
@@ -263,7 +264,7 @@
             background: #94a3b8 !important; /* Darker grey on hover */
             color: white !important;
             transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(171, 187, 204, 0.3);
+            box-shadow: 6px 15px rgba(171, 187, 204, 0.3);
         }
 
         .complaint-card {
@@ -624,10 +625,9 @@
                         <p class="subtitle">Sistem Pelayanan Pengaduan Masyarakat Pemerintah Daerah</p>
                     </div>
                     <div class="header-actions">
-                        {{-- MENGGUNAKAN CARBON UNTUK WAKTU SAAT INI DI DASHBOARD --}}
                         <div class="is-flex is-flex-direction-column is-align-items-flex-end">
-                            <p class="has-text-weight-semibold has-text-grey-dark">{{ \Carbon\Carbon::now()->translatedFormat('l, d F Y') }}</p>
-                            <p class="has-text-grey">{{ \Carbon\Carbon::now()->translatedFormat('H:i') }} WIB</p>
+                            <p class="has-text-weight-semibold has-text-grey-dark" id="current-date"></p>
+                            <p class="has-text-grey" id="current-time"></p>
                         </div>
                     </div>
                 </div>
@@ -721,7 +721,7 @@
                             </button>
                         </div>
                         <div class="control">
-                            <button type="reset" class="button is-light button-reset-custom"> {{-- Removed is-danger --}}
+                            <button type="reset" class="button is-light button-reset-custom">
                                 <i class="fas fa-sync-alt"></i>&nbsp;&nbsp;
                                 Reset Formulir
                             </button>
@@ -741,7 +741,7 @@
                         <div class="complaint-header">
                             <h3 class="complaint-title">{{ $item->judul }}</h3>
                             <span class="status-badge status-{{ strtolower($item->status) }}">
-                                {{ ucfirst($item->status) }} {{-- Capitalize status for display --}}
+                                {{ ucfirst($item->status) }}
                             </span>
                         </div>
                         
@@ -886,6 +886,30 @@
                 }, 300);
             });
         }, 7000); // Increased to 7 seconds
+
+        // Update clock automatically
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            const dateString = now.toLocaleDateString('id-ID', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+            const dateElement = document.getElementById('current-date');
+            const timeElement = document.getElementById('current-time');
+            if (dateElement) {
+                dateElement.textContent = dateString;
+            }
+            if (timeElement) {
+                timeElement.textContent = timeString + ' WIB';
+            }
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock(); // Initial call to display immediately
 
     </script>
 </body>

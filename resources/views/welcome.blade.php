@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIPADU - Sistem Pengaduan Masyarakat Kota Cimahi</title>
+    <title>SIPADU - Sistem Pengaduan Masyarakat Kecamatan Cimahi Utara</title>
     <link href="{{ asset('css/welcome.css') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <img src="{{ asset('images/logo_cimahi.png') }}" alt="Logo Cimahi">
-                <span>SIPADU Cimahi</span>
+                <img src="{{ asset('images/logo_cimahi.png') }}" alt="Logo Kecamatan Cimahi Utara">
+                <span>SIPADU Kecamatan Cimahi Utara</span>
             </div>
             <div class="nav-menu">
                 <a href="#home" class="nav-link">Beranda</a>
@@ -31,7 +30,6 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-overlay"></div>
         <div class="hero-content">
@@ -41,8 +39,8 @@
                     <br>Sistem Pengaduan Masyarakat
                 </h1>
                 <p class="hero-subtitle">
-                    Platform digital untuk menyampaikan keluhan, saran, dan aspirasi masyarakat Kota Cimahi.
-                    Wujudkan Cimahi yang lebih baik bersama-sama.
+                    Platform digital untuk menyampaikan keluhan, saran, dan aspirasi masyarakat Kecamatan Cimahi Utara.
+                    Wujudkan Kecamatan Cimahi Utara yang lebih baik bersama-sama.
                 </p>
                 {{-- <div class="hero-buttons">
                     <a href="{{ route('pengaduan.create') }}" class="btn btn-primary">
@@ -58,7 +56,7 @@
             <div class="hero-image">
                 <div class="floating-card">
                     <i class="fas fa-city"></i>
-                    <h3>Kota Cimahi</h3>
+                    <h3>Kecamatan Cimahi Utara</h3>
                     <p>Melayani dengan Hati</p>
                 </div>
             </div>
@@ -68,8 +66,7 @@
         </div>
     </section>
 
-   <!-- Stats Section -->
-<section class="stats">
+   <section class="stats">
     <div class="container">
         <div class="stats-grid">
             <div class="stat-item">
@@ -104,16 +101,70 @@
     </div>
 </section>
 
+    <section id="layanan" class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Layanan Kami</h2>
+                <p>Berbagai jenis layanan yang tersedia di Kecamatan Cimahi Utara untuk masyarakat.</p>
+            </div>
+            <div class="services-grid">
+                {{-- Generate 30 service cards --}}
+                @php
+                    $services = [
+                        ['icon' => 'fas fa-id-card', 'title' => 'Pelayanan KTP'],
+                        ['icon' => 'fas fa-users', 'title' => 'Pelayanan KK'],
+                        ['icon' => 'fas fa-building', 'title' => 'Surat Keterangan Domisili Perusahaan'],
+                        ['icon' => 'fas fa-hands-helping', 'title' => 'Surat Keterangan Domisili Yayasan'],
+                        ['icon' => 'fas fa-plane-departure', 'title' => 'Surat Pengantar Luar Negeri'],
+                        ['icon' => 'fas fa-hammer', 'title' => 'Surat Persetujuan Bangunan (IMB)'],
+                        ['icon' => 'fas fa-hand-holding-usd', 'title' => 'Surat Keterangan Tidak Mampu'],
+                        ['icon' => 'fas fa-file-invoice-dollar', 'title' => 'Surat Keterangan Bebas PBB'],
+                        ['icon' => 'fas fa-user-edit', 'title' => 'Surat Pengantar Perubahan Data Penduduk'],
+                        ['icon' => 'fas fa-scroll', 'title' => 'Legalisir KK/KTP'],
+                        ['icon' => 'fas fa-map-marked-alt', 'title' => 'Surat Pengantar Pindah Kota'],
+                        ['icon' => 'fas fa-house-user', 'title' => 'Surat Keterangan Menetap'],
+                        ['icon' => 'fas fa-baby-carriage', 'title' => 'Surat Keterangan Kelahiran'],
+                        ['icon' => 'fas fa-users-cog', 'title' => 'Surat Keterangan Ahli Waris'],
+                        ['icon' => 'fas fa-money-check-alt', 'title' => 'Pelayanan Akta Jual Beli'],
+                        ['icon' => 'fas fa-user-friends', 'title' => 'Surat Keterangan Tanggungan'],
+                        ['icon' => 'fas fa-ring', 'title' => 'Surat Keterangan Belum Menikah'],
+                        ['icon' => 'fas fa-store', 'title' => 'Surat Keterangan Usaha'],
+                        ['icon' => 'fas fa-seedling', 'title' => 'Surat Izin Usaha Mikro'],
+                        ['icon' => 'fas fa-theater-masks', 'title' => 'Surat Izin Keramaian'],
+                        ['icon' => 'fas fa-hand-point-right', 'title' => 'Surat Keterangan Bersih Diri'],
+                        ['icon' => 'fas fa-fingerprint', 'title' => 'Surat Keterangan Catatan Kepolisian'],
+                        ['icon' => 'fas fa-sitemap', 'title' => 'Surat Keterangan Domisili Partai'],
+                        ['icon' => 'fas fa-mosque', 'title' => 'Surat Keterangan Domisili Haji'],
+                        ['icon' => 'fas fa-chart-bar', 'title' => 'Surat Pengajuan Izin Operasional'],
+                        ['icon' => 'fas fa-pray', 'title' => 'Surat Rekomendasi Pembangunan Masjid'],
+                        ['icon' => 'fas fa-tools', 'title' => 'Surat Rekomendasi Renovasi Masjid'],
+                        ['icon' => 'fas fa-calendar-check', 'title' => 'Surat Rekomendasi Kegiatan Masyarakat'],
+                        ['icon' => 'fas fa-book-reader', 'title' => 'Surat Keterangan Perpustakaan'],
+                        ['icon' => 'fas fa-bullhorn', 'title' => 'Surat Keterangan Pemberitahuan Acara'],
+                    ];
+                @endphp
 
-    <!-- About Section -->
+                @foreach($services as $service)
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="{{ $service['icon'] }}"></i>
+                        </div>
+                        <h3>{{ $service['title'] }}</h3>
+                        <p>Ajukan permohonan dengan mudah.</p>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
     <section id="tentang" class="about">
         <div class="container">
             <div class="about-content">
                 <div class="about-text">
                     <h2>Tentang SIPADU</h2>
                     <p>
-                        Sistem Pengaduan Masyarakat (SIPADU) Kota Cimahi adalah platform digital yang 
-                        memungkinkan masyarakat untuk menyampaikan keluhan, saran, dan aspirasi secara 
+                        Sistem Pengaduan Masyarakat (SIPADU) Kecamatan Cimahi Utara adalah platform digital yang
+                        memungkinkan masyarakat untuk menyampaikan keluhan, saran, dan aspirasi secara
                         online dengan mudah dan transparan.
                     </p>
                     <div class="features">
@@ -141,13 +192,12 @@
                     </div>
                 </div>
                 <div class="about-image">
-                    <img src="{{ asset('images/logo_citra.png') }}" alt="Kota Cimahi">
+                    <img src="{{ asset('images/logo_city.png') }}" alt="Kecamatan Cimahi Utara">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- How It Works -->
     <section class="how-it-works">
         <div class="container">
             <div class="section-header">
@@ -190,7 +240,6 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="kontak" class="contact">
         <div class="container">
             <div class="contact-content">
@@ -234,22 +283,21 @@
                     <i class="fas fa-paper-plane"></i>
                     Kirim Pesan
                 </button>
-             </form>
+              </form>
         </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
                     <div class="footer-logo">
-                        <img src="{{ asset('images/logo_cimahi.png') }}" alt="Logo Cimahi">
-                        <h3>SIPADU Cimahi</h3>
+                        <img src="{{ asset('images/logo_cimahi.png') }}" alt="Logo Kecamatan Cimahi Utara">
+                        <h3>SIPADU Kecamatan Cimahi Utara</h3>
                     </div>
-                    <p>Sistem Pengaduan Masyarakat Kota Cimahi untuk pelayanan yang lebih baik.</p>
+                    <p>Sistem Pengaduan Masyarakat Kecamatan Cimahi Utara untuk pelayanan yang lebih baik.</p>
                     <div class="social-links">
                         {{-- <a href="#"><i class="fab fa-facebook"></i></a> --}}
                         <a href="https://www.tiktok.com/@kec.cimahi.utara"><i class="fab fa-tiktok"></i></a>
@@ -284,7 +332,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Pemerintah Kota Cimahi. All rights reserved.</p>
+                <p>© 2025 Pemerintah Kecamatan Cimahi Utara. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -351,15 +399,15 @@
                         const lowerCaseMessage = messageText.toLowerCase();
 
                         if (lowerCaseMessage.includes("halo") || lowerCaseMessage.includes("hi")) {
-                            botResponse = "Halo! Ada yang bisa saya bantu terkait pengaduan?";
-                        } else if (lowerCaseMessage.includes("pengaduan")) {
-                            botResponse = "Anda bisa membuat pengaduan baru dengan klik 'Masuk' dan kemudian 'Daftar Sekarang' jika belum punya akun.";
-                        } else if (lowerCaseMessage.includes("status")) {
-                            botResponse = "Untuk cek status pengaduan, Anda perlu masuk ke sistem terlebih dahulu.";
+                            botResponse = "Halo! Ada yang bisa saya bantu terkait layanan di Kecamatan Cimahi Utara?";
+                        } else if (lowerCaseMessage.includes("layanan")) {
+                            botResponse = "Kecamatan Cimahi Utara menyediakan berbagai layanan seperti Pelayanan KTP, KK, Surat Keterangan Domisili, IMB, dan banyak lagi. Anda bisa melihat daftar lengkapnya di bagian 'Layanan' di atas.";
                         } else if (lowerCaseMessage.includes("kontak")) {
                             botResponse = "Anda bisa menghubungi kami di (022) 6631638 atau email pengaduan@cimahikota.go.id.";
                         } else if (lowerCaseMessage.includes("terima kasih") || lowerCaseMessage.includes("mksh")) {
                             botResponse = "Sama-sama! Senang bisa membantu.";
+                        } else if (lowerCaseMessage.includes("jam pelayanan")) {
+                            botResponse = "Jam pelayanan kami adalah Senin - Jumat: 08:00 - 16:00 WIB. Sabtu dan Minggu tutup.";
                         }
 
                         botMessageDiv.textContent = botResponse;
